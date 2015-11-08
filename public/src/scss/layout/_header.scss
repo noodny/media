@@ -1,0 +1,71 @@
+.view-header {
+    line-height: 70px;
+    overflow: auto;
+    padding-left: 10px;
+    padding-right: 30px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+
+    @include media(web) {
+        line-height: 100px;
+        padding-right: 40px;
+    }
+
+    a {
+        color: $text;
+        display: inline-block;
+        font-size: 24px;
+        line-height: 40px;
+        height: 40px;
+        margin-left: 20px;
+        overflow: hidden;
+        text-transform: uppercase;
+        font-weight: 300;
+        position: relative;
+        vertical-align: middle;
+
+        @include media(web) {
+            margin-left: 30px;
+        }
+
+        .icon {
+            display: inline-block;
+            vertical-align: baseline;
+        }
+
+        &.settings {
+            @include media(tablet) {
+                float: right;
+                margin-top: 15px;
+            }
+
+            @include media(web) {
+                margin-top: 30px;
+            }
+        }
+
+        &:after {
+            background: $accent;
+            content: '';
+            height: 3px;
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            transition: position $transition;
+        }
+
+        &.active:after {
+            bottom: 0;
+        }
+
+        .no-touch &:hover {
+            color: $accent;
+
+            &.active {
+                color: $text;
+                cursor: default;
+            }
+        }
+    }
+}

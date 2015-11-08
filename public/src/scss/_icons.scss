@@ -1,0 +1,23 @@
+.icon-settings {
+    @include sprite($settings);
+}
+
+.icon-play-circle {
+    @include sprite($play-circle)
+}
+
+.icon-play-circle-big {
+    @include sprite($play-circle-big)
+}
+
+.icon-duration {
+    @include sprite($duration);
+}
+
+.icon-rating {
+    @include sprite($rating);
+}
+
+.icon-download {
+    @include sprite($download);
+}

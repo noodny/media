@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400&subset=latin-ext);
+
+body {
+    background: $grayDark;
+    color: $text;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+a {
+    color: $accent;
+    transition: color $transition;
+    text-decoration: none;
+
+    &:focus, &:hover, &:active {
+        color: $text;
+    }
+}
+
+.items-list {
+    @extend %clearfix;
+    list-style: none;
+
+    .list-item {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+
+.button {
+    background: rgba($accent, 0.8);
+    border-radius: 5px;
+    color: $text;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px;
+    transition: background $transition;
+
+    .icon {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .label {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .no-touch &:hover {
+        background: $accent;
+    }
+}
+
+.button-block {
+    display: block;
+    text-align: center;
+}
+
+.page-wrapper {
+    margin: 0 auto;
+    min-width: 320px;
+    max-width: 1200px;
+}

@@ -1,0 +1,39 @@
+<section class="view-movies">
+    <section class="view-search-container"></section>
+
+    <ul class="items-list movies-list page-wrapper">
+        <% movies.each(function(movie){ %>
+        <li class="list-item">
+            <div class="list-item-movie<%= movie.get('status') ? ' is-' + movie.get('status') : '' %>">
+                <span class="title"><%= movie.get('title') %></span>
+
+                <div class="image">
+                    <div class="wrapper">
+                        <img src="<%= movie.get('image') %>"/>
+                    </div>
+                </div>
+                <div class="details clearfix">
+                    <span class="title tablet"><%= movie.get('title') %></span>
+                    <span class="rating"><i class="icon icon-rating"></i><span class="label"><%= movie.get('rating') %>/10</span></span>
+                    <span class="duration"><i class="icon icon-duration"></i><span class="label"><%= movie.get('duration') %></span></span>
+                    <span class="description"><%= movie.get('description') %></span>
+                </div>
+                <div class="item-status">
+                    <span class="label"><i class="icon"></i><%= movie.getStatusLabel() %></span>
+
+                    <div class="item-status-progress">
+                        <div class="back"></div>
+                        <div class="front" style="width:<%= movie.getProgress()*100 %>%;"></div>
+                    </div>
+                </div>
+                <div class="item-action">
+                    <a href="#" class="button button-block">
+                        <i class="icon"></i>
+                        <span class="label"><%= movie.getActionLabel() %></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <% }) %>
+    </ul>
+</section>

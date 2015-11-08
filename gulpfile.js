@@ -20,7 +20,7 @@ var copy = [
 ];
 
 var scripts = [
-    src + 'js/**/*.js',
+    src + 'js/**/*',
     '!' + src + 'js/vendor/**/*.js'
 ];
 
@@ -92,6 +92,9 @@ gulp.task('scripts', function() {
         .pipe($.webpack({
             output: {
                 filename: 'main.js'
+            },
+            resolve: {
+                modulesDirectories: [src + 'js', 'node_modules']
             },
             module: {
                 loaders: [
