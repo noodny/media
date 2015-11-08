@@ -1,1 +1,14 @@
 @import 'sprites';
+
+@import 'variables';
+@import 'mixins';
+@import 'placeholders';
+@import 'base';
+
+@import 'layout/header';
+@import 'layout/player';
+
+@import 'views/movies';
+@import 'views/series';
+@import 'views/music';
+@import 'views/photos';
