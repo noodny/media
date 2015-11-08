@@ -46,21 +46,23 @@ gulp.task('copy', function() {
 });
 
 gulp.task('sprites', function() {
-    return sprity.src({
-        src: src + 'img/sprite/*.png',
-        style: '_sprites.scss',
-        processor: 'sass', // make sure you have installed sprity-sass
-        cssPath: '../img',
-        margin: 1,
-        orientation: 'binary-tree',
-        dimension: [{
-            ratio: 1, dpi: 72
-        }, {
-            ratio: 2, dpi: 192
-        }]
-    })
+    return sprity
+        .src({
+            src: src + 'img/sprite/*.png',
+            style: '_sprites.scss',
+            processor: 'sass', // make sure you have installed sprity-sass
+            cssPath: '../img',
+            margin: 1,
+            orientation: 'binary-tree',
+            dimension: [{
+                ratio: 1, dpi: 72
+            }, {
+                ratio: 2, dpi: 192
+            }]
+        })
+        .on('error', handleError)
         .pipe($.imagemin())
-        .pipe($.if('*.png', gulp.dest(dist + 'img'), gulp.dest(src + 'scss')))
+        .pipe($.if('*.png', gulp.dest(dist + 'img'), gulp.dest(src + 'scss')));
 });
 
 gulp.task('styles', function() {
