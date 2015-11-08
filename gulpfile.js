@@ -16,7 +16,6 @@ var copy = [
     src + 'img/**/*',
     '!' + src + 'img/sprite',
     src + '*',
-    '!' + src + 'templates',
     '!' + src + 'scss'
 ];
 
@@ -98,11 +97,6 @@ gulp.task('scripts', function() {
                 loaders: [
                     {test: /text!.*(\.html$|\.js$)/, loader: "text-loader"}
                 ]
-            },
-            resolve: {
-                alias: {
-                    'templates': '../templates'
-                }
             },
             resolveLoader: {
                 alias: {
