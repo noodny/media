@@ -1,0 +1,6 @@
+/.idea
+/node_modules
+
+/public/src/scss/_sprites.scss
+
+/public/dist
