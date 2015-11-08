@@ -16,5 +16,5 @@
     "trailing": true,
     "onevar": true,
     "nonstandard": true,
-    "predef": ["define", "require", "Modernizr"]
+    "predef": ["define", "require", "Modernizr", "Backbone", "$", "_"]
 }
