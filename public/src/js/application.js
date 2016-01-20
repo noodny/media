@@ -8,9 +8,6 @@ define([
                 this.$container = $('#page-container');
 
                 this.router = router;
-                this.router.on('viewChange', function(view, options) {
-                    this.setCurrentView(view, options);
-                }, this);
 
                 this.headerView = new HeaderView({
                     el: $('#header-container')
@@ -21,6 +18,14 @@ define([
                     el: $('#player-container')
                 });
                 this.playerView.render();
+
+                this.router.on('viewChange', function(view, options) {
+                    this.setCurrentView(view, options);
+                }, this);
+
+                this.router.on('route', function(route) {
+                    this.headerView.trigger('routeChange', route);
+                }.bind(this));
 
                 this.router.start();
             },
