@@ -65,8 +65,7 @@ define([
             }));
             this.$items = this.$('.list-item-movie');
 
-            // TODO: throttle
-            $(window).on('resize', this.onWindowResize.bind(this));
+            $(window).on('resize', _.throttle(this.onWindowResize.bind(this), 200));
             this.onWindowResize();
         },
         onListItemClick: function(event) {
