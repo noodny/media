@@ -1,0 +1,72 @@
+.view-search {
+    .form-search {
+        display: block;
+        margin: 0 10px 10px;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+
+        @include media(smartphone-big) {
+            margin: 10px 30px 20px;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        @include media(tablet) {
+            margin: 0 auto 30px;
+            max-width: 530px;
+        }
+
+        input {
+            background: none;
+            border: 1px solid $grayMedium;
+            border-radius: 0;
+            color: #fff;
+            font-size: 16px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 40px;
+            transition: border $transition;
+            -webkit-appearance: none;
+
+            @include media(smartphone-big) {
+                padding-right: 50px;
+            }
+
+            &:focus {
+                border-color: $grayLight;
+                outline: none;
+            }
+        }
+
+        button {
+            border: 0;
+            background: none;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 40px;
+            text-align: center;
+
+            @include media(smartphone-big) {
+                width: 50px;
+            }
+
+            .icon-search {
+                display: inline-block;
+                vertical-align: middle;
+
+                @include media(smartphone-big) {
+                    @include sprite($search-big);
+                }
+            }
+        }
+    }
+}

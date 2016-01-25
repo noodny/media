@@ -1,8 +1,9 @@
 define([
     'utils/device',
     'collections/movies',
+    'views/search',
     'text!templates/movies.html'
-], function(device, MoviesCollection, template) {
+], function(device, MoviesCollection, SearchView, template) {
     var View = Backbone.View.extend({
         events: {
             'click .list-item-movie': 'onListItemClick'
@@ -68,6 +69,11 @@ define([
                 movies: this.collection
             }));
             this.$items = this.$('.list-item-movie');
+
+            this.searchView = new SearchView({
+                el: this.$('.view-search-container')
+            });
+            this.searchView.render();
 
             $(window).on('resize', _.throttle(this.onWindowResize.bind(this), 200));
             this.onWindowResize();
