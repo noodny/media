@@ -14,7 +14,9 @@ define([
                     duration: '2:22:00',
                     description: 'Adaptacja opowiadania Stephena Kinga. Historia niesłusznie skazanego na dożywocie bankiera, który musi przeżyć w brutalnym świecie rządzonym przez strażników i współwięźniów.',
                     image: 'http://1.fwcdn.pl/po/10/48/1048/6925401.3.jpg',
-                    rating: '8,8'
+                    rating: '8,8',
+                    watched: true,
+                    hidden: false
                 },
                 {
                     title: 'Skazani na Shawshank',
@@ -25,7 +27,9 @@ define([
                     status: 'downloading',
                     progress: {
                         downloading: 0.5
-                    }
+                    },
+                    watched: true,
+                    hidden: false
                 },
                 {
                     title: 'Skazani na Shawshank na Shawshank Shawshank',

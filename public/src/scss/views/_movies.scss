@@ -339,6 +339,30 @@
             }
         }
 
+        &.is-watched {
+            &:before {
+                content: '';
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 45px 45px 0;
+                border-color: transparent rgba($accent, 0.9) transparent transparent;
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 2;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                z-index: 2;
+                @include sprite($tick);
+                @extend .icon;
+            }
+        }
+
         &.active,
         .no-touch &:hover {
             .title {
