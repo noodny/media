@@ -15,6 +15,8 @@ define([
                 downloading: null,
                 playing: null
             },
+            episode: null,
+            season: null,
             image: null,
             watched: null,
             hidden: null

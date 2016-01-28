@@ -46,7 +46,7 @@ a {
         vertical-align: middle;
     }
 
-    .no-touch &:hover {
+    .no-touchevents &:hover {
         background: $accent;
     }
 }

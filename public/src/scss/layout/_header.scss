@@ -59,7 +59,7 @@
             bottom: 0;
         }
 
-        .no-touch &:hover {
+        .no-touchevents &:hover {
             color: $accent;
 
             &.active {

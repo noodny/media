@@ -1,0 +1,506 @@
+.view-series {
+    .view-search-container {
+        @include media(smartphone-big) {
+            margin-bottom: -15px;
+        }
+    }
+
+    .list-item-series {
+        @include media(smartphone-big) {
+            transition: background $transition;
+            padding: 15px 0 0;
+
+            .no-touchevents &:hover {
+                background: #222326;
+            }
+        }
+    }
+
+    .episodes-list {
+        @include media(smartphone-big) {
+            padding: 0 10px 20px;
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+
+            .list-item {
+                box-sizing: border-box;
+                display: inline-block;
+                padding: 0 10px;
+                vertical-align: bottom;
+                width: (100%/2.5);
+            }
+        }
+
+        @include media(tablet) {
+            .list-item {
+                width: (100%/3.5);
+            }
+        }
+
+        @include media(web) {
+            padding: 0 20px 20px;
+
+            .list-item {
+                width: (100%/4.5);
+            }
+        }
+    }
+
+    .view-episodes-series-header {
+        font-size: 20px;
+        text-transform: uppercase;
+        padding: 10px 15px 5px;
+
+        @include media(smartphone-big) {
+            padding-left: 30px;
+        }
+
+        @include media(web) {
+            padding-left: 42px;
+            font-size: 24px;
+        }
+    }
+
+    .view-episodes-season-header {
+        font-size: 16px;
+
+        span {
+            display: block;
+            padding: 5px 15px 10px;
+
+            @include media(smartphone-big) {
+                padding-left: 10px;
+            }
+
+            @include media(web) {
+                padding-left: 0;
+            }
+        }
+
+        @include media(smartphone-big) {
+            height: 40px;
+        }
+    }
+
+    .list-item-episode {
+        @extend %clearfix;
+        background: $grayMedium;
+        max-height: 62px;
+        overflow: hidden;
+        padding: 0 15px;
+        position: relative;
+        transition: max-height $transition;
+
+        &.active {
+            max-height: 480px;
+        }
+
+        @include media(smartphone-big) {
+            max-height: none;
+        }
+
+        .title {
+            box-sizing: border-box;
+            display: block;
+            font-size: 20px;
+            line-height: 25px;
+            height: 35px;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-bottom: 10px;
+            padding-right: 65px;
+            text-overflow: ellipsis;
+
+            @include media(smartphone-big) {
+                display: none;
+                padding-right: 0;
+            }
+        }
+
+        .details .title {
+            display: none;
+            clear: both;
+
+            @include media(smartphone-big) {
+                display: block;
+            }
+        }
+
+        .episode {
+            font-size: 12px;
+            display: block;
+            padding-top: 10px;
+            padding-bottom: 5px;
+
+            @include media(smartphone-big) {
+                display: none;
+            }
+        }
+
+        .details .episode {
+            display: none;
+            float: left;
+            width: 50%;
+
+            @include media(smartphone-big) {
+                display: block;
+            }
+        }
+
+        .duration {
+            display: block;
+            line-height: 15px;
+            margin-bottom: 10px;
+
+            .label,
+            .icon {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .icon {
+                margin-right: 3px;
+            }
+
+            @include media(smartphone-big) {
+                float: right;
+                width: 49%;
+                text-align: right;
+                font-size: 12px;
+                display: block;
+                padding-top: 10px;
+                padding-bottom: 5px;
+                margin-bottom: 0;
+            }
+        }
+
+        .description {
+            clear: both;
+            display: block;
+            padding-bottom: 15px;
+        }
+
+        .details {
+            box-sizing: border-box;
+            float: left;
+            font-size: 14px;
+            line-height: 1.3;
+            padding-left: 10px;
+            width: 50%;
+
+            @include media(smartphone-big) {
+                width: 100%;
+            }
+        }
+
+        .image {
+            float: left;
+            width: 50%;
+            margin-bottom: 15px;
+
+            @include media(smartphone-big) {
+                float: none;
+                width: 100%;
+                margin-bottom: 0;
+                position: relative;
+            }
+
+            .wrapper {
+                display: block;
+                padding-bottom: 56.25%;
+                overflow: hidden;
+                width: 100%;
+                position: relative;
+            }
+
+            img {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        .image .item-action {
+            display: none;
+
+            @include media(smartphone-big) {
+                display: block;
+            }
+        }
+
+        .details .item-action {
+            @include media(smartphone-big) {
+                display: none;
+            }
+        }
+
+        .item-action {
+            box-sizing: border-box;
+            padding: 5px 0 0;
+
+            @include media(smartphone-big) {
+                position: absolute;
+                left: 50%;
+                right: auto;
+                top: 50%;
+                height: 70px;
+                width: 150px;
+                margin-left: -75px;
+                margin-top: -35px;
+                padding: 0;
+                opacity: 0;
+                transition: opacity $transition;
+
+                .button {
+                    line-height: 70px;
+                    height: 70px;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+            }
+
+            .icon {
+                display: inline-block !important;
+                vertical-align: middle;
+                @include sprite($play-circle-big);
+            }
+        }
+
+        .item-status {
+            position: absolute;
+            display: none;
+            top: 0;
+            right: 0;
+            height: 45px;
+            margin-top: 8.5px;
+            width: 80px;
+            padding: 5px;
+            box-sizing: border-box;
+
+            @include media(smartphone-big) {
+                background: rgba($grayMedium, 0.9);
+                border-radius: 5px;
+                left: 50%;
+                right: auto;
+                top: 50%;
+                height: 70px;
+                line-height: 55px;
+                padding-bottom: 10px;
+                width: 150px;
+                margin-left: -75px;
+                margin-top: -35px;
+                overflow: hidden;
+                text-align: center;
+                transition: opacity $transition;
+            }
+
+            .icon {
+                display: inline-block !important;
+                margin-right: 3px;
+                vertical-align: middle;
+            }
+
+            .label {
+                display: inline-block;
+                font-size: 10px;
+                vertical-align: middle;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 100%;
+
+                @include media(smartphone-big) {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .item-status-progress {
+            display: block;
+            height: 8px;
+            margin-top: 5px;
+            position: relative;
+
+            @include media(smartphone-big) {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+
+            .back {
+                background: $text;
+                display: block;
+                height: 100%;
+            }
+
+            .front {
+                background: $accent;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+            }
+        }
+
+        &.is-playing {
+            .item-status {
+                display: block;
+            }
+
+            .item-status .icon {
+                @include sprite($play-circle);
+
+                @include media(smartphone-big) {
+                    @include sprite($play-circle-big);
+                }
+            }
+
+            .item-action .icon {
+                @include sprite($pause-circle-big);
+            }
+        }
+
+        &.is-playing-paused {
+            .item-status {
+                display: block;
+            }
+
+            .item-status-progress .front {
+                background: $grayLight;
+            }
+
+            .item-status .icon {
+                @include sprite($pause-circle);
+
+                @include media(smartphone-big) {
+                    @include sprite($pause-circle-big);
+                }
+            }
+
+            .item-action .icon {
+                @include sprite($play-circle-big);
+            }
+        }
+
+        &.is-downloading {
+            .item-status {
+                display: block;
+            }
+
+            .item-status .icon {
+                @include sprite($download);
+
+                @include media(smartphone-big) {
+                    @include sprite($download-big);
+                }
+            }
+
+            .item-action .icon {
+                @include sprite($pause-circle-big);
+            }
+        }
+
+        &.is-downloading-paused {
+            .item-status {
+                display: block;
+            }
+
+            .item-status .icon {
+                @include sprite($pause-circle);
+
+                @include media(smartphone-big) {
+                    @include sprite($pause-circle-big);
+                }
+            }
+
+            .item-status-progress .front {
+                background: $grayLight;
+            }
+
+            .item-action .icon {
+                @include sprite($download-big);
+            }
+        }
+
+        &.is-watched {
+            &:before {
+                content: '';
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 45px 45px 0;
+                border-color: transparent rgba($accent, 0.9) transparent transparent;
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 2;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                z-index: 2;
+                @include sprite($tick);
+                @extend .icon;
+            }
+        }
+
+        &.active,
+        .no-touchevents &:hover {
+            .title {
+                height: auto;
+                white-space: normal;
+            }
+        }
+
+        @include media(smartphone-big) {
+            padding: 0;
+            transition: box-shadow $transition, padding $transition, margin $transition;
+
+            .details {
+                padding: 0 15px;
+                max-height: 75px;
+                transition: padding $transition, max-height $transition;
+            }
+
+            .description {
+                margin: 0 -15px;
+                opacity: 0;
+                transition: margin $transition, opacity $transition 0.10s;
+            }
+
+            &.active,
+            .no-touchevents &:hover {
+                padding: 15px;
+                margin: -15px;
+                max-height: none;
+                box-shadow: rgba(0, 0, 0, 0.75) 1px 1px 5px 0;
+                z-index: 3;
+
+                .details {
+                    padding: 0;
+                    max-height: 400px;
+                }
+
+                .description {
+                    margin: 0;
+                    opacity: 1;
+                }
+
+                .item-action {
+                    opacity: 1;
+                }
+
+                .item-status {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}

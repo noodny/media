@@ -7,9 +7,9 @@ define([
 ], function(MoviesView, SeriesView, MusicView, PhotosView, ErrorView) {
     var Router = Backbone.Router.extend({
         routes: {
-            "": "home",
-            "!": "home",
-            "!/": "home",
+            "": "movies",
+            "!": "movies",
+            "!/": "movies",
             "!/movies": "movies",
             "!/series": "series",
             "!/music": "music",
@@ -19,13 +19,6 @@ define([
 
         start: function() {
             Backbone.history.start();
-        },
-
-        home: function() {
-            this.navigate('!/movies', {
-                replace: true,
-                trigger: true
-            });
         },
 
         movies: function() {

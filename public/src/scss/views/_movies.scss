@@ -364,7 +364,7 @@
         }
 
         &.active,
-        .no-touch &:hover {
+        .no-touchevents &:hover {
             .title {
                 height: auto;
                 white-space: normal;
@@ -388,7 +388,7 @@
             }
 
             &.active,
-            .no-touch &:hover {
+            .no-touchevents &:hover {
                 padding: 15px;
                 margin: -15px;
                 max-height: none;

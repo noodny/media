@@ -1,0 +1,12 @@
+<section class="view-series">
+    <section class="view-search-container page-wrapper"></section>
+
+    <% series.each(function(serie){ %>
+    <div class="list-item-series">
+        <div class="view-episodes-series-header page-wrapper">
+            <%= serie.get('title') %>
+        </div>
+        <div class="view-episodes-container" data-series-id="<%= serie.get('id') %>"></div>
+    </div>
+    <% }) %>
+</section>

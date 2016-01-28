@@ -1,0 +1,51 @@
+<div class="view-episodes">
+    <ul class="items-list episodes-list">
+        <% var currentSeason = 0 %>
+        <% episodes.each(function(episode){ %>
+        <li class="list-item">
+            <div class="view-episodes-season-header">
+                <% if(episode.get('season') !== currentSeason) { %>
+                <% currentSeason = episode.get('season') %>
+                <span>Sezon <%= episode.get('season') %></span>
+                <% } %>
+            </div>
+            <div class="list-item-episode<%= episode.get('status') ? ' is-' + episode.get('status') : '' %><%= episode.get('is-watched') ? ' watched' : '' %>">
+                <span class="episode">Odcinek <%= episode.get('episode') %></span>
+                <span class="title"><%= episode.get('title') %></span>
+
+                <div class="image">
+                    <div class="wrapper">
+                        <img src="<%= episode.get('image') %>"/>
+                    </div>
+                    <div class="item-status">
+                        <span class="label"><i class="icon"></i><%= episode.getStatusLabel() %></span>
+
+                        <div class="item-status-progress">
+                            <div class="back"></div>
+                            <div class="front" style="width:<%= episode.getProgress()*100 %>%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="item-action">
+                        <a href="#" class="button button-block">
+                            <i class="icon"></i>
+                            <span class="label"><%= episode.getActionLabel() %></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="details clearfix">
+                    <span class="episode tablet">Odcinek <%= episode.get('episode') %></span>
+                    <span class="duration"><i class="icon icon-duration"></i><span class="label"><%= episode.get('duration') %></span></span>
+                    <span class="title tablet"><%= episode.get('title') %></span>
+                    <div class="item-action">
+                        <a href="#" class="button button-block">
+                            <i class="icon"></i>
+                            <span class="label"><%= episode.getActionLabel() %></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <% }) %>
+    </ul>
+</div>

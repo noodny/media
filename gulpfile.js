@@ -105,6 +105,9 @@ gulp.task('scripts', function() {
                 alias: {
                     'text': 'text-loader'
                 }
+            },
+            externals: {
+                "jquery": "$"
             }
         }))
         .pipe($.if(env !== 'development', $.uglify()))

@@ -66,7 +66,7 @@ define([], function () {
     /* jscs: enable maximumLineLength */
 
     device.isTouch = function() {
-        return Modernizr.touch;
+        return Modernizr.touchevents;
     };
 
     device.getViewportType = function() {
@@ -83,7 +83,11 @@ define([], function () {
     };
 
     device.isViewportWidthGte = function(width) {
-        return $(window).innerWidth() >= width ? true : false;
+        return this.getViewportWidth() >= width ? true : false;
+    };
+
+    device.getViewportWidth = function() {
+        return $(window).innerWidth();
     };
 
     device.isViewport = function(type) {
