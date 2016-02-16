@@ -1,5 +1,64 @@
-<section class="view-music">
-    <section class="view-search-container page-wrapper"></section>
-    <section class="view-your-music-container page-wrapper">
-    </section>
+<section class="view-music page-wrapper">
+    <section class="view-search-container"></section>
+    <div class="your-radios">
+        <header>
+            <h2>Radio</h2>
+            <a href="#!/music/radio" class="browse browse-radios"><i class="icon icon-radio"></i>Przeglądaj</a>
+        </header>
+
+        <div class="items-list radios-list">
+            <% radios.each(function(radio){ %>
+            <a href="#" class="list-item list-item-radio">
+                <div class="image">
+                    <img src="<%= radio.get('image') %>"/>
+                </div>
+                <div class="name"><%= radio.get('name') %></div>
+                <div class="item-action <%= radio.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i></div>
+            </a>
+            <% }) %>
+        </div>
+    </div>
+    <div class="your-spotify">
+        <header class="spotify-header">
+            <h2>Spotify</h2>
+            <a href="#!/music/browse" class="browse browse-spotify"><i class="icon icon-spotify"></i>Przeglądaj</a>
+        </header>
+
+        <div class="your-playlists">
+            <h3>Twoje playlisty</h3>
+
+            <div class="items-list playlists-list">
+                <% playlists.each(function(playlist){ %>
+                <a href="#" class="list-item list-item-playlist">
+                    <div class="image">
+                        <img src="<%= playlist.get('image') %>"/>
+                    </div>
+                    <div class="name"><%= playlist.get('name') %></div>
+                    <div class="item-action <%= playlist.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i>
+                    </div>
+                </a>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="your-tracks">
+            <h3>Twoje utwory</h3>
+
+            <div class="items-list tracks-list">
+                <% tracks.each(function(track){ %>
+                <div class="list-item list-item-track" data-play="<%= track.get('uri') %>">
+                    <a href="#" class="item-action <%= track.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i></a>
+                    <div class="artists">
+                        <% _.each(track.get('artists'), function(artist, index){ %><%= index > 0 ? ', ' : '' %><a
+                        href="<%= artist.uri %>"><%= artist.name %></a><% }) %>
+                    </div>
+                    <div class="details" data-play>
+                        <div class="name"><i class="icon icon-play-circle"></i><%= track.get('name') %></div>
+                        <div class="duration"><%= track.getDuration() %></div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
 </section>

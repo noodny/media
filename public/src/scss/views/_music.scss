@@ -1,4 +1,4 @@
-.view-your-music {
+.view-music {
     padding: 0 10px;
 
     header {
@@ -23,8 +23,11 @@
         float: right;
 
         @include media(tablet) {
-            float: none;
             margin-left: 10px;
+        }
+
+        @include media(tablet-big) {
+            float: none;
         }
 
         @include media(web) {
@@ -411,6 +414,8 @@
     }
 
     @include media(tablet) {
+        padding: 0 10px 10px;
+
         .your-radios {
             width: (100%/3);
         }
@@ -444,16 +449,18 @@
     }
 
     @include media(web) {
+        padding: 0 20px 20px;
+
         .list-item-track {
             .artists {
                 box-sizing: border-box;
-                width: 25%;
+                width: 30%;
                 float: left;
-                padding: 10px 5px 10px 0;
+                padding: 10px 10px 10px 0;
             }
 
             .details {
-                width: 75%;
+                width: 70%;
                 float: left;
 
                 .name {
