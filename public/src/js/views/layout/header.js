@@ -13,6 +13,7 @@ define([
             this.$items = this.$('.header-item');
         },
         onRouteChange: function(route) {
+            route = route.split(/[A-Z]/)[0];
             this.$items.removeClass('active')
                 .filter('[data-route="' + route + '"]').addClass('active');
         }
