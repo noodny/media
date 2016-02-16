@@ -25,3 +25,19 @@
 .icon-search {
     @include sprite($search);
 }
+
+.icon-radio {
+    @include sprite($radio);
+}
+
+.icon-spotify {
+    @include sprite($spotify);
+}
+
+.icon-star-full {
+    @include sprite($star-full);
+}
+
+.icon-star-empty {
+    @include sprite($star-empty);
+}

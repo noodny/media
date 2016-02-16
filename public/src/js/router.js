@@ -13,6 +13,13 @@ define([
             "!/movies": "movies",
             "!/series": "series",
             "!/music": "music",
+            "!/music/search/:query": "musicSearch",
+            "!/music/browse": "musicBrowse",
+            "!/music/radios": "musicRadios",
+            "!/music/browse/category/:id": "musicBrowseCategory",
+            "!/music/browse/playlist/:id": "musicBrowsePlaylist",
+            "!/music/browse/artist/:id": "musicBrowseArtist",
+            "!/music/browse/album/:id": "musicBrowseAlbum",
             "!/photos": "photos",
             "*error": "error"
         },

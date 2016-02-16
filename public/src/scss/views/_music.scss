@@ -1,0 +1,483 @@
+.view-your-music {
+    padding: 0 10px;
+
+    header {
+        @extend %clearfix;
+        padding: 5px 5px 10px;
+
+        h2 {
+            display: inline-block;
+            font-size: 24px;
+            line-height: 40px;
+            text-transform: uppercase;
+        }
+    }
+
+    h3 {
+        font-size: 20px;
+        margin: 5px 5px 10px;
+    }
+
+    .browse {
+        @extend %button;
+        float: right;
+
+        @include media(tablet) {
+            float: none;
+            margin-left: 10px;
+        }
+
+        @include media(web) {
+            margin-left: 20px;
+        }
+    }
+
+    .your-radios,
+    .your-playlists {
+        margin-bottom: 10px;
+    }
+
+    .list-item-radio,
+    .list-item-playlist {
+        background: $grayMedium;
+        display: block;
+        padding-left: 60px;
+        min-height: 60px;
+        position: relative;
+
+        .image {
+            background: #fff;
+            width: 60px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            img {
+                display: inline-block;
+                width: 60px;
+                vertical-align: middle;
+                position: absolute;
+                top: 50%;
+                margin-top: -30px;
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                z-index: 2;
+                @extend .icon;
+                @include sprite($play-circle-big);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -(sprite-height($play-circle-big)/2);
+                margin-left: -(sprite-width($play-circle-big)/2);
+            }
+
+            &:before {
+                background: rgba($grayMedium, 0.8);
+                border-radius: 100%;
+                width: sprite-width($play-circle-big) + 20;
+                height: sprite-height($play-circle-big) + 20;
+                margin-top: -(sprite-height($play-circle-big)/2) - 10;
+                margin-left: -(sprite-width($play-circle-big)/2) - 10;
+                transition: height $transition, width $transition;
+            }
+        }
+
+        .name {
+            display: block;
+            color: #fff;
+            font-size: 20px;
+            vertical-align: 24px;
+            padding: 20px 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .item-action {
+            position: absolute;
+            width: 60px;
+            top: 0;
+            text-align: center;
+            bottom: 0;
+            right: 0;
+
+            &:before {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+            }
+
+            i {
+                display: inline-block;
+                vertical-align: middle;
+                @include sprite-height($star-full);
+                @include sprite-width($star-full);
+            }
+
+            .no-touchevents & {
+                &:hover i {
+                    animation: grow 0.3s 1 linear;
+                }
+
+                &.star {
+                    i {
+                        @include sprite-position($star-empty);
+                    }
+
+                    &:hover i {
+                        @include sprite-position($star-full);
+                    }
+                }
+
+                &.unstar {
+                    i {
+                        @include sprite-position($star-full);
+                    }
+
+                    &:hover i {
+                        @include sprite-position($star-empty);
+                    }
+                }
+            }
+
+            .touchevents &.star i {
+                @include sprite-position($star-full);
+            }
+            .touchevents &.unstar i {
+                @include sprite-position($star-empty);
+            }
+        }
+
+        .touchevents & {
+            .name {
+                padding-right: 60px;
+            }
+        }
+
+        .no-touchevents & {
+            .item-action {
+                cursor: pointer;
+                opacity: 0;
+                transition: opacity $transition;
+            }
+
+            .image:before {
+                transition: width $transition, height $transition, margin $transition;
+                width: 0;
+                height: 0;
+                margin: 0;
+            }
+
+            &:hover .image:before {
+                width: sprite-width($play-circle-big) + 20;
+                height: sprite-height($play-circle-big) + 20;
+                margin-top: -(sprite-height($play-circle-big)/2) - 10;
+                margin-left: -(sprite-width($play-circle-big)/2) - 10;
+            }
+
+            .image:after {
+                transition: transform $transition;
+                transform: scale(0);
+            }
+
+            &:hover .image:after {
+                transform: scale(1);
+            }
+
+            &:hover .item-action {
+                opacity: 1;
+            }
+        }
+
+        .touchevents & {
+            .image:before,
+            .image:after {
+                display: none;
+            }
+        }
+    }
+
+    .your-tracks {
+        margin: 0 -10px;
+
+        h3 {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    }
+
+    .list-item-track {
+        @extend %clearfix;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        padding: 5px 10px;
+        position: relative;
+        transition: background $transition;
+
+        .no-touchevents &:hover {
+            background: $grayMedium;
+        }
+
+        .artists {
+            color: $grayLight;
+            font-size: 14px;
+            line-height: 18px;
+            padding-top: 5px;
+
+            a {
+                color: $grayLight;
+                font-size: 14px;
+
+                .no-touchevents &:hover {
+                    color: lighten($grayLight, 20%);
+                }
+            }
+        }
+
+        .details {
+            @extend %clearfix;
+            display: block;
+
+            .name {
+                box-sizing: border-box;
+                padding: 10px 5px 5px 0;
+                float: left;
+                line-height: 20px;
+                width: 80%;
+
+                .icon {
+                    display: inline-block;
+                    margin-bottom: -2px;
+                    transition: width $transition, margin $transition;
+                    width: 0;
+                }
+            }
+
+            .duration {
+                box-sizing: border-box;
+                color: $grayLight;
+                font-size: 14px;
+                float: right;
+                width: 20%;
+                text-align: right;
+                padding: 10px 0 5px 5px;
+            }
+        }
+
+        .touchevents {
+            .duration {
+                display: none;
+            }
+        }
+
+        .no-touchevents &:hover .details .name .icon,
+        .touchevents & .details .name .icon {
+            margin-right: 5px;
+            width: sprite-width($play-circle);
+        }
+
+        .item-action {
+            position: absolute;
+            width: 60px;
+            top: 0;
+            text-align: center;
+            bottom: 0;
+            right: 0;
+
+            &:before {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+            }
+
+            i {
+                display: inline-block;
+                vertical-align: middle;
+                @include sprite-height($star-full);
+                @include sprite-width($star-full);
+            }
+
+            .no-touchevents & {
+                &:hover i {
+                    animation: grow 0.3s 1 linear;
+                }
+
+                &.star {
+                    i {
+                        @include sprite-position($star-empty);
+                    }
+
+                    &:hover i {
+                        @include sprite-position($star-full);
+                    }
+                }
+
+                &.unstar {
+                    i {
+                        @include sprite-position($star-full);
+                    }
+
+                    &:hover i {
+                        @include sprite-position($star-empty);
+                    }
+                }
+            }
+
+            .touchevents &.star i {
+                @include sprite-position($star-full);
+            }
+            .touchevents &.unstar i {
+                @include sprite-position($star-empty);
+            }
+        }
+
+        .no-touchevents & {
+            .item-action {
+                opacity: 0;
+                transition: opacity $transition;
+            }
+
+            .duration {
+                transition: opacity $transition;
+            }
+
+            &:hover {
+                .item-action {
+                    opacity: 1;
+                    z-index: 2;
+                }
+
+                .duration {
+                    opacity: 0;
+                }
+            }
+        }
+
+        .touchevents & {
+            .details {
+                padding-right: 50px;
+
+                .name {
+                    float: none;
+                    width: auto;
+                }
+
+                .duration {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @include media(smartphone-big) {
+        padding: 0;
+
+        .your-radios {
+            box-sizing: border-box;
+            float: left;
+            width: 50%;
+            padding: 0 7.5px 0 15px;
+        }
+
+        .your-playlists,
+        .spotify-header {
+            float: right;
+            width: 50%;
+        }
+
+        .spotify-header {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 5px (15+5px) 10px (7.5+5px);
+        }
+
+        .your-playlists {
+            box-sizing: border-box;
+            padding: 0 15px 0 7.5px;
+        }
+
+        .your-tracks {
+            clear: both;
+            padding: 0 15px 10px;
+        }
+    }
+
+    @include media(tablet) {
+        .your-radios {
+            width: (100%/3);
+        }
+
+        .spotify-header {
+            float: none;
+            width: auto;
+
+        }
+
+        .your-spotify {
+            float: left;
+            width: (100%/3)*2;
+        }
+
+        .your-playlists {
+            float: left;
+            width: 50%;
+            padding-right: 7.5px;
+        }
+
+        .your-tracks {
+            box-sizing: border-box;
+            clear: none;
+            float: left;
+            width: 50%;
+            margin: 0;
+            padding-left: 7.5px;
+            padding-right: 15px;
+        }
+    }
+
+    @include media(web) {
+        .list-item-track {
+            .artists {
+                box-sizing: border-box;
+                width: 25%;
+                float: left;
+                padding: 10px 5px 10px 0;
+            }
+
+            .details {
+                width: 75%;
+                float: left;
+
+                .name {
+                    padding: 10px 5px 10px 0;
+                }
+            }
+        }
+    }
+
+    @include media(web-big) {
+        .your-radios {
+            width: 25%;
+        }
+
+        .your-spotify {
+            width: 75%;
+        }
+
+        .your-playlists {
+            width: (100%/3);
+        }
+
+        .your-tracks {
+            width: (100%/3)*2;
+        }
+    }
+}

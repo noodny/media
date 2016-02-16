@@ -17,11 +17,10 @@ define([
     };
 
     date.formatDuration = function(duration) {
-        var hours = Math.floor(duration / 3600),
-            minutes =  Math.floor((duration % 3600) / 60),
+        var minutes =  Math.floor((duration % 3600) / 60),
             seconds = duration % 60;
 
-        return (hours > 0 ? hours + ':' : '') +  number.zeroPad(minutes) + ':' + number.zeroPad(seconds);
+        return minutes + ':' + number.zeroPad(seconds);
     };
 
     return date;
