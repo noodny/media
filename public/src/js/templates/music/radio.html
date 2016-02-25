@@ -1,4 +1,27 @@
-<section class="view-music-radio">
-    <section class="view-search-container page-wrapper"></section>
+<section class="view-music-radio page-wrapper">
+    <section class="view-search-container"></section>
 
+    <div class="radio-genres">
+        <h2>Gatunki</h2>
+
+        <ul class="items-list radio-genres-list">
+            <% genres.each(function(genre) { %>
+            <li class="list-item list-item-genre">
+                <a href="#!/music/radio/genre-<%= genre.getSlug() %>"><%= genre.get('name') %></a>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+
+    <div class="radio-countries">
+        <h2>Kraje</h2>
+
+        <ul class="items-list radio-countries-list">
+            <% countries.each(function(country) { %>
+            <li class="list-item list-item-country">
+                <a href="#!/music/radio/country-<%= country.getSlug() %>"><%= country.get('name') %></a>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
 </section>
