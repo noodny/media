@@ -26,6 +26,7 @@
     "gulp-inline-image": "0.0.4",
     "gulp-jshint": "^1.12.0",
     "gulp-load-plugins": "^1.1.0",
+    "gulp-nodemon": "^2.0.6",
     "gulp-sass": "^2.1.0",
     "gulp-sequence": "^0.4.1",
     "gulp-size": "^2.0.0",
@@ -36,5 +37,13 @@
     "sprity": "^1.0.7",
     "sprity-sass": "^1.0.4",
     "text-loader": "0.0.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "lodash": "^4.5.1",
+    "node-spop": "^1.0.3",
+    "socket.io": "^1.4.5"
   }
 }

@@ -131,10 +131,20 @@ gulp.task('sync', function() {
     });
 });
 
+gulp.task('server', function() {
+    $.nodemon({
+        script: 'server/index.js',
+        ext: 'js',
+        env: {'NODE_ENV': 'development'}
+    }).on('restart', function() {
+        browserSync.reload();
+    });
+});
+
 var sequence;
 
 if(env === 'development') {
-    sequence = $.sequence('clean', 'copy', ['sprites', 'styles', 'scripts'], 'watch', 'sync');
+    sequence = $.sequence('clean', 'copy', ['sprites', 'styles', 'scripts'], 'server', 'watch', 'sync');
 } else {
     sequence = $.sequence('clean', 'copy', ['sprites', 'styles', 'scripts']);
 }
