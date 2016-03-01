@@ -34,7 +34,10 @@ function authorize() {
             }
 
             if(err || res.statusCode > 200 || body.error) {
-                return reject(err || body.error || res.statusCode);
+                return reject({
+                    message: err || body.error,
+                    code: res.statusCode
+                });
             }
 
             if(body.token_type && body.expires_in) {
@@ -43,11 +46,6 @@ function authorize() {
                 setTimeout(function() {
                     token = null;
                 }, token.expires_in);
-
-                if(body.refresh_token) {
-                    config.spotify.authCode = body.refresh_token;
-                    console.log(body.refresh_token);
-                }
             }
 
             resolve(body);
@@ -56,15 +54,15 @@ function authorize() {
 }
 
 function requestAuthorized(options) {
-    return authorize().then(function(token) {
-        options = _.defaults(options, {
-            baseUrl: apiUrl,
-            headers: {
-                'Authorization': token.token_type + ' ' + token.access_token
-            }
-        });
+    return new Promise(function(resolve, reject) {
+        authorize().then(function(token) {
+            options = _.defaults(options, {
+                baseUrl: apiUrl,
+                headers: {
+                    'Authorization': token.token_type + ' ' + token.access_token
+                }
+            });
 
-        return new Promise(function(resolve, reject) {
             request(options, function(err, res, body) {
                 try {
                     body = JSON.parse(body);
@@ -73,29 +71,171 @@ function requestAuthorized(options) {
                 }
 
                 if(err || res.statusCode > 200 || body.error) {
-                    return reject(err || body.error || res.statusCode);
+                    return reject({
+                        message: err || body.error,
+                        code: res.statusCode
+                    });
                 }
 
                 resolve(body);
             });
+        }, reject);
+    });
+}
+
+function parseUri(uri) {
+    var parts = uri.split(':');
+
+    if(parts[0] === 'spotify') {
+        parts.shift();
+    }
+
+    if(parts.length > 2 && parts[0] === 'user' && parts[2] === 'playlist') {
+        return {
+            type: parts[2],
+            id: parts[3],
+            userId: parts[1]
+        };
+    } else {
+        return {
+            type: parts[0],
+            id: parts[1]
+        };
+    }
+}
+
+module.exports = {
+    parseUri: parseUri,
+    getFeaturedPlaylists: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'browse/featured-playlists',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
         });
-    }, function(error) {
-        console.error('authentication failed: ', error);
-    });
-}
+    },
+    getMyTracks: function(options) {
+        options = options || {};
 
-function getFeaturedPlaylists() {
-    return requestAuthorized({
-        url: 'browse/featured-playlists',
-        qs: {
-            limit: 20,
-            country: 'PL'
-        }
-    });
-}
+        return requestAuthorized({
+            url: 'me/tracks',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getMyPlaylists: function(options) {
+        options = options || {};
 
-getFeaturedPlaylists().then(function(data) {
-    console.log(data)
-}, function() {
-    console.log(arguments)
-});
+        return requestAuthorized({
+            url: 'me/playlists',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getCategories: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'browse/categories',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getCategoryPlaylists: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'browse/categories/' + options.id + '/playlists',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getArtist: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'artists/' + options.id,
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getArtistAlbums: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'artists/' + options.id + '/albums',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getAlbum: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'albums/' + options.id,
+            qs: {
+                country: 'PL'
+            }
+        });
+    },
+    getAlbumTracks: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'albums/' + options.id + '/tracks',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getPlaylist: function(options) {
+        options = options || {};
+
+        var uri = parseUri(options.uri);
+
+        return requestAuthorized({
+            url: 'users/' + uri.userId + '/playlists/' + uri.id,
+            qs: {
+                country: 'PL'
+            }
+        });
+    },
+    getPlaylistTracks: function(options) {
+        options = options || {};
+
+        var uri = parseUri(options.uri);
+
+        return requestAuthorized({
+            url: 'users/' + uri.userId + '/playlists/' + uri.id + '/tracks',
+            qs: {
+                limit: options.limit || 20,
+                offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    }
+};

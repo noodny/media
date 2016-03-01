@@ -1,4 +1,6 @@
 .DS_Store
+/server/config.js
+
 /.idea
 /node_modules
 

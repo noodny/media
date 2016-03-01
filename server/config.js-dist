@@ -1,0 +1,9 @@
+module.exports = {
+    spotify: {
+        host: '',
+        port: '',
+        clientId: '',
+        clientSecret: '',
+        authToken: ''
+    }
+};

@@ -2,6 +2,7 @@ var express = require('express');
 var parser = require('body-parser');
 var cors = require('cors');
 var socket = require('socket.io');
+var requireDir = require('require-dir');
 var http = require('http');
 
 var player = require('./player');
@@ -9,7 +10,7 @@ var middlewares = require('./middlewares');
 
 var app = express();
 
-var routes = require('./routes');
+var routes = requireDir('./routes');
 
 app.use(cors());
 app.use(parser.json());
@@ -33,6 +34,15 @@ app.use(parser.json());
 //
 //app.get('/player/status', routes.player.getStatus);
 //app.get('/player/features', routes.player.getFeatures);
+
+app.get('/spotify/my-playlists', routes.spotify.getMyPlaylists);
+app.get('/spotify/my-tracks', routes.spotify.getMyTracks);
+app.get('/spotify/categories', routes.spotify.getCategories);
+app.get('/spotify/categories/:id', routes.spotify.getCategoryPlaylists);
+app.get('/spotify/featured-playlists', routes.spotify.getFeaturedPlaylists);
+app.get('/spotify/artists/:id', routes.spotify.getArtist);
+app.get('/spotify/albums/:id', routes.spotify.getAlbum);
+app.get('/spotify/playlists/:uri', routes.spotify.getPlaylist);
 
 app.get('/player/open', function(req, res, next) {
     player.open(req.query.type, req.query.id);

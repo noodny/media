@@ -5,27 +5,9 @@ var _ = require('lodash');
 var spop = require('node-spop');
 
 var config = require('./../config');
+var spotify = require('./../spotify');
 
 var instance;
-
-function parseUri(uri) {
-    var parts = uri.split(':');
-
-    // remove the spotify part
-    parts.shift();
-
-    if(parts.length > 2 && parts[0] === 'user' && parts[2] === 'playlist') {
-        return {
-            type: parts[2],
-            id: parts[3]
-        };
-    } else {
-        return {
-            type: parts[0],
-            id: parts[1]
-        };
-    }
-}
 
 var status = {
     playlistUri: null,
@@ -59,7 +41,7 @@ function setStatus(data) {
     }
 
     if(data.uri) {
-        var uri = parseUri(data.uri);
+        var uri = spotify.parseUri(data.uri);
         if(uri.type === 'track') {
             status.trackId = uri.id;
         }
@@ -96,7 +78,7 @@ var SpotifyPlayer = function() {
 util.inherits(SpotifyPlayer, EventEmitter);
 
 SpotifyPlayer.prototype.open = function(id) {
-    var uri = parseUri(id);
+    var uri = spotify.parseUri(id);
 
     resetStatus();
 
