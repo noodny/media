@@ -43,7 +43,7 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "lodash": "^4.5.1",
-    "node-spop": "^1.1.0",
+    "node-spop": "^1.2.0",
     "request": "^2.69.0",
     "require-dir": "^0.3.0",
     "socket.io": "^1.4.5"

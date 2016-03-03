@@ -103,7 +103,7 @@ function parseUri(uri) {
         };
     }
 }
-
+// TODO: set shared query string paramaters in one place (country, default limit & offset)
 module.exports = {
     parseUri: parseUri,
     getTrack: function(options) {
@@ -182,8 +182,6 @@ module.exports = {
         return requestAuthorized({
             url: 'artists/' + options.id,
             qs: {
-                limit: options.limit || 20,
-                offset: options.offset || 0,
                 country: 'PL'
             }
         });
@@ -196,6 +194,16 @@ module.exports = {
             qs: {
                 limit: options.limit || 20,
                 offset: options.offset || 0,
+                country: 'PL'
+            }
+        });
+    },
+    getArtistTopTracks: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'artists/' + options.id + '/top-tracks',
+            qs: {
                 country: 'PL'
             }
         });
