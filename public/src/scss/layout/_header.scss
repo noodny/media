@@ -17,6 +17,7 @@
         font-size: 24px;
         line-height: 40px;
         height: 40px;
+        padding-bottom: 6px;
         margin-left: 20px;
         overflow: hidden;
         text-transform: uppercase;
@@ -56,7 +57,7 @@
         }
 
         &.active:after {
-            bottom: 0;
+            bottom: 6px;
         }
 
         .no-touchevents &:hover {
@@ -65,6 +66,32 @@
             &.active {
                 color: $text;
                 cursor: default;
+            }
+        }
+
+        &.nested {
+            &:before {
+                content: '';
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 6px 6px 0 6px;
+                border-color: $accent transparent transparent transparent;
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                margin-left: -3px;
+                transition: transform $transition;
+            }
+
+            .no-touchevents &:hover {
+                color: $accent;
+                cursor: pointer;
+
+                &:before {
+                    transform: translateY(-9px) rotateX(-180deg);
+                }
             }
         }
     }

@@ -13,9 +13,14 @@ define([
             this.$items = this.$('.header-item');
         },
         onRouteChange: function(route) {
-            route = route.split(/[A-Z]/)[0];
-            this.$items.removeClass('active')
-                .filter('[data-route="' + route + '"]').addClass('active');
+            var parts = route.split(/[A-Z]/);
+
+            var $active = this.$items.removeClass('active').removeClass('nested')
+                .filter('[data-route="' + parts[0] + '"]').addClass('active');
+
+            if(parts[1]) {
+                $active.addClass('nested');
+            }
         }
     });
 

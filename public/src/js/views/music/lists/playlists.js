@@ -35,10 +35,8 @@ define([
             if(this.options.layout) {
                 this.$el.addClass('layout-' + this.options.layout);
 
-                if(this.options.layout === 'slider') {
-                    $(window).on('resize', _.throttle(this.onWindowResize.bind(this), 200));
-                    this.onWindowResize();
-                }
+                $(window).on('resize', _.throttle(this.onWindowResize.bind(this), 200));
+                this.onWindowResize();
             }
         },
         onFetchSuccess: function(data) {
@@ -59,16 +57,18 @@ define([
 
             $items.height(maxHeight);
 
-            if(device.isViewportWidthGte(1024)) {
-                var width = 0;
+            if(this.options.layout === 'slider') {
+                if(device.isViewportWidthGte(1024)) {
+                    var width = 0;
 
-                if(device.isViewportWidthGte(1200)) {
-                    width = (device.getViewportWidth() - 1200) / 2;
+                    if(device.isViewportWidthGte(1200)) {
+                        width = (device.getViewportWidth() - 1200) / 2;
+                    }
+
+                    $lists.css('padding-left', width + 42 - 10);
+                } else {
+                    $lists.removeAttr('style');
                 }
-
-                $lists.css('padding-left', width + 42 - 10);
-            } else {
-                $lists.removeAttr('style');
             }
         }
     });
