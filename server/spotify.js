@@ -160,7 +160,8 @@ module.exports = {
             qs: {
                 limit: options.limit || 20,
                 offset: options.offset || 0,
-                country: 'PL'
+                country: 'PL',
+                locale: 'pl_PL'
             }
         });
     },
