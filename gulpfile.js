@@ -135,7 +135,8 @@ gulp.task('server', function() {
     $.nodemon({
         script: 'server/index.js',
         ext: 'js',
-        env: {'NODE_ENV': 'development'}
+        env: {'NODE_ENV': 'development'},
+        ignore: ['public']
     }).on('restart', function() {
         browserSync.reload();
     });
