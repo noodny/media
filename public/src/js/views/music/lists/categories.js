@@ -1,15 +1,13 @@
 define([
-    'collections/music/tracks',
-    'text!templates/music/lists/tracks.html',
-    'text!templates/music/lists/items/track.html'
+    'collections/music/categories',
+    'text!templates/music/lists/categories.html',
+    'text!templates/music/lists/items/category.html'
 ], function(Collection, template, itemTemplate) {
     var View = Backbone.View.extend({
         initialize: function(options) {
             this.options = options;
 
-            this.collection = new Collection(options.elements || [], {
-                type: options.type || 'my'
-            });
+            this.collection = new Collection(options.elements || []);
         },
         render: function() {
             this.$el.html(template);
@@ -26,7 +24,7 @@ define([
             var html = '';
 
             this.collection.each(function(item) {
-                html += _.template(itemTemplate, {track: item});
+                html += _.template(itemTemplate, {category: item});
             });
 
             this.$('.items-list').html(html).addClass('loaded');
@@ -35,7 +33,7 @@ define([
             this.renderItems();
         },
         onFetchFailure: function() {
-            console.error('TracksView: failed fetching playlist collection')
+            console.error('CategoriesView: failed fetching playlist collection')
         }
     });
 

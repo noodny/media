@@ -8,7 +8,6 @@
         position: relative;
 
         .image {
-            background: #fff;
             width: 60px;
             overflow: hidden;
             position: absolute;
@@ -163,7 +162,84 @@
                 display: none;
             }
         }
+
+        .layout-slider &,
+        .layout-grid & {
+            background: none;
+            box-sizing: border-box;
+            display: inline-block;
+            padding: 2.5px 5px;
+            vertical-align: top;
+
+            .image {
+                position: relative;
+                padding-bottom: 100%;
+                width: 100%;
+
+                img {
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    margin: 0;
+                }
+            }
+
+            .details {
+                background: $grayMedium;
+            }
+
+            .name {
+                padding: 10px;
+                font-size: 16px;
+                line-height: 18px;
+                white-space: normal;
+            }
+
+            .description {
+                display: block;
+            }
+        }
+
+        .layout-grid & {
+            float: left;
+            width: 50%;
+
+            @include media(smartphone-big) {
+                width: (100%/3);
+            }
+
+            @include media(tablet) {
+                width: (100%/4);
+            }
+
+            @include media(web) {
+                width: (100%/5);
+            }
+        }
+
+        .layout-slider & {
+            width: 45%;
+
+            @include media(smartphone-big) {
+                width: 37%;
+            }
+
+            @include media(tablet) {
+                width: 23%;
+            }
+
+            @include media(web) {
+                width: 15%;
+            }
+        }
     }
+}
+
+.layout-slider .items-list {
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .view-music {
@@ -608,4 +684,100 @@
     }
 }
 
+.items-list {
+    transition: opacity $transition;
+    opacity: 0;
 
+    &.loaded {
+        opacity: 1;
+
+        & + .loader {
+            display: none;
+        }
+    }
+}
+
+
+// TODO: remove when starring/following is implemented
+.star {
+    display: none!important;
+}
+
+.view-music-browse {
+    h2 {
+        font-size: 20px;
+        padding: 10px;
+
+        @include media(web) {
+            padding-left: 42px;
+            padding-bottom: 15px;
+            font-size: 24px;
+        }
+    }
+}
+
+.categories-list {
+    padding: 0 5px;
+
+    @include media(web) {
+        padding: 0 35px;
+    }
+}
+
+.list-item-category {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 0 5px 5px;
+
+    @include media(smartphone-big) {
+        width: (100%/3);
+    }
+
+    @include media(tablet) {
+        width: (100%/4);
+    }
+
+    @include media(tablet-big) {
+        width: (100%/5);
+    }
+
+    .image {
+        height: 0;
+        width: 100%;
+        padding-bottom: 100%;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+    }
+
+    .name {
+        color: #fff;
+        position: absolute;
+        top: 70%;
+        left: 10px;
+        right: 10px;
+        text-align: center;
+    }
+
+    .no-touchevents &:hover {
+        .name {
+            text-decoration: underline;
+        }
+    }
+}
+
+.view-music-browse-category {
+    .items-list {
+        padding: 0 5px;
+
+        @include media(web) {
+            padding: 0 35px;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 <section class="view-movies">
     <section class="view-search-container page-wrapper"></section>
 
-    <ul class="items-list movies-list page-wrapper">
+    <ul class="items-list movies-list page-wrapper loaded">
         <% movies.each(function(movie){ %>
         <li class="list-item">
             <div class="list-item-movie<%= movie.get('status') ? ' is-' + movie.get('status') : '' %><%= movie.get('is-watched') ? ' watched' : '' %>">
@@ -36,4 +36,5 @@
         </li>
         <% }) %>
     </ul>
+    <div class="loader"></div>
 </section>

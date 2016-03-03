@@ -1,8 +1,9 @@
 define([
+    'utils/device',
     'collections/music/playlists',
     'text!templates/music/lists/playlists.html',
     'text!templates/music/lists/items/playlist.html'
-], function(Collection, template, itemTemplate) {
+], function(device, Collection, template, itemTemplate) {
     var View = Backbone.View.extend({
         initialize: function(options) {
             this.options = options;
@@ -12,6 +13,8 @@ define([
             });
         },
         render: function() {
+            this.$el.html(template);
+
             if(!this.options.fetched) {
                 this.collection.fetch()
                     .done(this.onFetchSuccess.bind(this))
@@ -21,16 +24,52 @@ define([
             }
         },
         renderItems: function() {
-            this.$el.html(_.template(template, {
-                itemTemplate: itemTemplate,
-                playlists: this.collection
-            }));
+            var html = '';
+
+            this.collection.each(function(item) {
+                html += _.template(itemTemplate, {playlist: item});
+            });
+
+            this.$('.items-list').html(html).addClass('loaded');
+
+            if(this.options.layout) {
+                this.$el.addClass('layout-' + this.options.layout);
+
+                if(this.options.layout === 'slider') {
+                    $(window).on('resize', _.throttle(this.onWindowResize.bind(this), 200));
+                    this.onWindowResize();
+                }
+            }
         },
         onFetchSuccess: function(data) {
+            this.trigger('fetch-success', data);
             this.renderItems();
         },
         onFetchFailure: function() {
             console.error('PlaylistView: failed fetching playlist collection')
+        },
+        onWindowResize: function() {
+            var $items = this.$('.list-item-playlist .details');
+            var $lists = this.$('.playlists-list');
+
+            $items.removeAttr('style');
+            var maxHeight = Math.max.apply(null, $items.map(function() {
+                return $(this).height();
+            }).get());
+
+            $items.height(maxHeight);
+
+            if(device.isViewportWidthGte(1024)) {
+                var width = 0;
+
+                if(device.isViewportWidthGte(1200)) {
+                    width = (device.getViewportWidth() - 1200) / 2;
+                }
+
+                $lists.css('padding-left', width + 42 - 10);
+            } else {
+                $lists.removeAttr('style');
+            }
         }
     });
 

@@ -72,12 +72,14 @@ define([
                     $items.parent().height(height);
                 }
 
-                if(device.isViewportWidthGte(1200)) {
-                    var width = (device.getViewportWidth() - 1200)/2;
+                if(device.isViewportWidthGte(1024)) {
+                    var width = 0;
 
-                    if(width > 0) {
-                        $lists.css('padding-left', width + 42 - 10);
+                    if(device.isViewportWidthGte(1200)) {
+                        width = (device.getViewportWidth() - 1200) / 2;
                     }
+
+                    $lists.css('padding-left', width + 42 - 10);
                 } else {
                     $lists.removeAttr('style');
                 }

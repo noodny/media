@@ -2,7 +2,10 @@
     <div class="image">
         <img src="<%= playlist.get('image') %>"/>
     </div>
-    <div class="name"><%= playlist.get('name') %></div>
+    <div class="details">
+        <div class="name"><%= playlist.get('name') %></div>
+        <div class="description"><%= playlist.get('description') %></div>
+    </div>
     <div class="item-action <%= playlist.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i>
     </div>
 </a>

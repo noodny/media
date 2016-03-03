@@ -1,5 +1,5 @@
 define(function() {
     return {
-        apiUrl: 'http://localhost:5000/'
+        apiUrl: window.location.protocol + '//' + window.location.hostname + ':5000/'
     }
 });

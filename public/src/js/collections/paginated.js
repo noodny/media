@@ -17,7 +17,11 @@ define(function() {
 
     var Collection = Backbone.Collection.extend({
         parse: function(data) {
-            var items = _.isArray(data) ? data : data.items || data.tracks || data.playlists || data.albums || [];
+            var items = _.isArray(data) ? data : data.items || data.tracks || data.playlists || data.albums || data.categories || [];
+
+            if(items.items) {
+                items = items.items;
+            }
 
             if(_.has(data, ['next', 'offset', 'limit']) && data.next) {
                 setParams.call(this, data)

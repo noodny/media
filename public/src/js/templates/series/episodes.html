@@ -1,5 +1,5 @@
 <div class="view-episodes">
-    <ul class="items-list episodes-list">
+    <ul class="items-list episodes-list loaded">
         <% var currentSeason = 0 %>
         <% episodes.each(function(episode){ %>
         <li class="list-item">
@@ -48,4 +48,5 @@
         </li>
         <% }) %>
     </ul>
+    <div class="loader"></div>
 </div>
