@@ -1,0 +1,5 @@
+<div class="items-list tracks-list">
+    <% tracks.each(function(track){ %>
+    <%= _.template(itemTemplate, {track: track}) %>
+    <% }) %>
+</div>

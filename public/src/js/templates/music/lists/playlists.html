@@ -1,0 +1,5 @@
+<div class="items-list playlists-list">
+    <% playlists.each(function(playlist){ %>
+        <%= _.template(itemTemplate, {playlist: playlist}) %>
+    <% }) %>
+</div>

@@ -1,0 +1,11 @@
+<div class="list-item list-item-track" data-play-id="<%= track.get('uri') %>" data-play-type="spotify">
+    <a href="#" class="item-action <%= track.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i></a>
+    <div class="artists">
+        <% track.get('artists').each(function(artist, index){ %><%= index > 0 ? ', ' : '' %><a
+        href="<%= artist.getUrl() %>"><%= artist.get('name') %></a><% }) %>
+    </div>
+    <div class="details" data-play>
+        <div class="name"><i class="icon icon-play-circle"></i><%= track.get('name') %></div>
+        <div class="duration"><%= track.getDuration() %></div>
+    </div>
+</div>

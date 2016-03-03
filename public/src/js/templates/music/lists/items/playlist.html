@@ -1,0 +1,8 @@
+<a href="#" class="list-item list-item-playlist" data-play-id="<%= playlist.get('uri') %>" data-play-type="spotify">
+    <div class="image">
+        <img src="<%= playlist.get('image') %>"/>
+    </div>
+    <div class="name"><%= playlist.get('name') %></div>
+    <div class="item-action <%= playlist.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i>
+    </div>
+</a>
