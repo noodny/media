@@ -106,6 +106,16 @@ function parseUri(uri) {
 
 module.exports = {
     parseUri: parseUri,
+    getTrack: function(options) {
+        options = options || {};
+
+        return requestAuthorized({
+            url: 'tracks/' + options.id,
+            qs: {
+                country: 'PL'
+            }
+        });
+    },
     getFeaturedPlaylists: function(options) {
         options = options || {};
 

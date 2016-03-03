@@ -69,7 +69,7 @@ var SpotifyPlayer = function() {
         this.ready = true;
         this.emit('ready');
     }.bind(this), function(error) {
-        console.error('Error connecting to spop server.', error);
+        console.error('SPOP: Error connecting to server.', error);
     });
 
     EventEmitter.call(this);
@@ -87,6 +87,35 @@ SpotifyPlayer.prototype.open = function(id) {
             // fetch all artist albums from spotify api and uplay + uadd them to spop
         } else if(uri.type === 'track') {
             // fetch track data and use its first album field as playlistUri
+            spotify.getTrack({
+                id: uri.id
+            }).then(function(data) {
+                if(data.album) {
+                    status.playlistUri = data.album.uri;
+
+                    return spop.qclear().then(function(){
+                        return spop.uadd(data.album.uri);
+                    }, function(error) {
+                        console.error('SPOP: Failed clearing queue', error);
+                    }).then(function(status) {
+                        return spop.goto(data.track_number);
+                    }, function(error) {
+                        console.error('SPOP: Failed enqueuing album ' + data.album.uri, error);
+                    }).then(function(status) {
+                        setStatus(status);
+                    }, function(error) {
+                        console.error('SPOP: Failed playing album track number ' + data.track_number, error);
+                    });
+                } else {
+                    return spop.uplay(id).then(function(status) {
+                        setStatus(status);
+                    }, function(error) {
+                        console.error('SPOP: Failed playing track ' + uri.id, error);
+                    });
+                }
+            }, function(error) {
+                console.error('SPOP: Failed fetching track data for ' + id, error);
+            });
         } else {
             if(uri.type === 'playlist' || uri.type === 'album') {
                 status.playlistUri = id;
@@ -95,9 +124,11 @@ SpotifyPlayer.prototype.open = function(id) {
             return spop.uplay(id).then(function(status) {
                 setStatus(status);
             }, function(error) {
-                console.error('SPOP= Failed opening ' + uri.id, error);
+                console.error('SPOP: Failed opening ' + id, error);
             });
         }
+    } else {
+        console.error('SPOP: Not connected to server, skipping playback of ' + id);
     }
 };
 
