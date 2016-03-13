@@ -927,7 +927,7 @@
         clear: both;
         margin-top: 20px;
 
-        .view-album {
+        .view-album-container {
             @include media(tablet-big) {
                 width: 50%;
                 display: inline-block;

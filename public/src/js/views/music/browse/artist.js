@@ -59,7 +59,7 @@ define([
             var html = '';
 
             this.collection.each(function(album) {
-                html += '<div class="view-album" data-id="' + album.get('id') + '"></div>';
+                html += '<div class="view-album-container" data-id="' + album.get('id') + '"></div>';
             });
 
             this.$('.view-albums').html(html);
@@ -68,7 +68,7 @@ define([
 
             this.collection.each(function(album) {
                 var view = new AlbumView({
-                    el: this.$('.view-albums .view-album[data-id="' + album.get('id') + '"]'),
+                    el: this.$('.view-albums .view-album-container[data-id="' + album.get('id') + '"]'),
                     model: album
                 });
                 this.albumViews.push(view);
