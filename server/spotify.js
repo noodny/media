@@ -195,7 +195,9 @@ module.exports = {
             qs: {
                 limit: options.limit || 20,
                 offset: options.offset || 0,
-                country: 'PL'
+                country: 'PL',
+                market: 'PL',
+                album_type: 'album,single'
             }
         });
     },

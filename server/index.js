@@ -41,7 +41,10 @@ app.get('/spotify/categories', routes.spotify.getCategories);
 app.get('/spotify/categories/:id', routes.spotify.getCategoryPlaylists);
 app.get('/spotify/featured-playlists', routes.spotify.getFeaturedPlaylists);
 app.get('/spotify/artists/:id', routes.spotify.getArtist);
+app.get('/spotify/artists/:id/albums', routes.spotify.getArtistAlbums);
+app.get('/spotify/artists/:id/tracks', routes.spotify.getArtistTopTracks);
 app.get('/spotify/albums/:id', routes.spotify.getAlbum);
+app.get('/spotify/albums/:id/tracks', routes.spotify.getAlbumTracks);
 app.get('/spotify/playlists/:uri', routes.spotify.getPlaylist);
 
 app.get('/player/open', function(req, res, next) {

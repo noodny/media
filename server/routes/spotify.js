@@ -32,7 +32,7 @@ var routes = [
     'getFeaturedPlaylists', 'getCategories', 'getCategoryPlaylists',
     'getMyPlaylists', 'getMyTracks',
     'getCategories', 'getCategoryPlaylists',
-    'getArtist', 'getArtistAlbums',
+    'getArtist', 'getArtistAlbums', 'getArtistTopTracks',
     'getAlbum', 'getAlbumTracks',
     'getPlaylist', 'getPlaylistTracks'
 ];

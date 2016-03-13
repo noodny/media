@@ -4,7 +4,7 @@
     <div class="radio-genres">
         <h2>Gatunki</h2>
 
-        <ul class="items-list radio-genres-list">
+        <ul class="items-list radio-genres-list loaded">
             <% genres.each(function(genre) { %>
             <li class="list-item list-item-genre">
                 <a href="#!/music/radio/genre-<%= genre.getSlug() %>"><%= genre.get('name') %></a>
@@ -16,7 +16,7 @@
     <div class="radio-countries">
         <h2>Kraje</h2>
 
-        <ul class="items-list radio-countries-list">
+        <ul class="items-list radio-countries-list loaded">
             <% countries.each(function(country) { %>
             <li class="list-item list-item-country">
                 <a href="#!/music/radio/country-<%= country.getSlug() %>"><%= country.get('name') %></a>

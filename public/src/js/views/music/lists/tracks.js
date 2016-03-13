@@ -30,12 +30,14 @@ define([
             });
 
             this.$('.items-list').html(html).addClass('loaded');
+
+            this.trigger('render');
         },
         onFetchSuccess: function(data) {
             this.renderItems();
         },
         onFetchFailure: function() {
-            console.error('TracksView: failed fetching playlist collection')
+            console.error('TracksView: failed fetching tracks collection')
         }
     });
 

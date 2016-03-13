@@ -13,8 +13,25 @@ define([
             Backbone.Collection.prototype.initialize.apply(this, arguments);
         },
         url: function() {
-            //TODO: handle this.type
-            return config.apiUrl + 'spotify/my-tracks' + this.getQueryParams();
+            var url = config.apiUrl;
+
+            if(this.type === 'my') {
+                url += 'spotify/my-tracks';
+            }
+
+            if(this.type.indexOf('artist') === 0) {
+                var id = this.type.replace('artist-', '');
+                url += 'spotify/artists/' + id + '/tracks';
+            }
+
+            if(this.type.indexOf('album') === 0) {
+                var id = this.type.replace('album-', '');
+                url += 'spotify/albums/' + id + '/tracks';
+            }
+
+            url += this.getQueryParams();
+
+            return url;
         }
     });
 

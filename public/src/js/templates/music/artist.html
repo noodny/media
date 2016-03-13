@@ -1,0 +1,11 @@
+<div class="cover" style="background-image: url('<%= artist.get('image') %>')"></div>
+<img class="image" src="<%= artist.get('image') %>">
+<div class="details">
+    <p class="label">Wykonawca</p>
+    <p class="name"><%= artist.get('name') %></p>
+    <div class="followers">
+        <span class="label">Obserwuje</span>
+        <span class="count"><%= artist.get('followers') %></span>
+    </div>
+    <a class="button" href="#" data-play-type="spotify" data-play-id="<%= artist.get('uri') %>">odtwórz</a>
+</div>
