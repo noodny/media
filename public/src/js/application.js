@@ -1,7 +1,8 @@
 define([
+    'config',
     'views/layout/header',
     'views/layout/player'
-], function(HeaderView, PlayerView) {
+], function(config, HeaderView, PlayerView) {
     var instance,
         Application = {
             initialize: function(router) {
@@ -28,6 +29,17 @@ define([
                 }.bind(this));
 
                 this.router.start();
+
+                //TODO: remove
+                $('body').on('click', '[data-play-id]', function(event) {
+                    event.preventDefault();
+
+                    var $el = $(event.currentTarget);
+                    var id = $el.data('play-id');
+                    var type = $el.data('play-type');
+
+                    $.get(config.apiUrl + 'player/open?id=' + id + '&type=' + type);
+                })
             },
             setCurrentView: function(View, options) {
                 if(this.currentView) {
