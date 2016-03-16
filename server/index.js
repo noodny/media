@@ -30,8 +30,6 @@ app.use(parser.json());
 //app.get('/radio/countries', routes.radio.getCountries);
 //app.get('/radio/starred', routes.radio.getStarred);
 //
-//app.get('/spotify/auth', routes.spotify.getAuth);
-//
 //app.get('/player/status', routes.player.getStatus);
 //app.get('/player/features', routes.player.getFeatures);
 
@@ -52,6 +50,7 @@ app.get('/player/status', function(req, res, next) {
     res.send(player.getStatus());
 });
 
+// TODO: remove REST player endpoints when testing phase is done
 app.get('/player/open', function(req, res, next) {
     player.open(req.query.type, req.query.id);
     res.status(200).end();
@@ -112,25 +111,25 @@ player.on('time', function(data) {
     io.emit('player:time', data);
 });
 
-// io.emit('player:time')
+// notify about download/watching progress
+// io.emit('movie:status')
+// io.emit('series:status')
 
 io.on('connection', function(socket) {
     // use socket.emit(event) to send a message to the connected client
     // use socket.on(event) to listen to events from a client
-
-    // notify about download/watching progress
-    // socket.emit('movie:status')
-    // socket.emit('series:status')
 
     socket.on('player:open', function(data) {
         player.open(data.type, data.id);
     });
 
     socket.on('player:command', function(data) {
-        console.log('player:command', data);
+        if(process.env.NODE_ENV !== 'production') {
+            console.log('player:command', data);
+        }
+
         if(player.hasFeature(data.command)) {
             var func = player.mapFeature(data.command);
-            console.log(func);
             player[func](data.parameters);
         }
     });
