@@ -31,7 +31,9 @@ define([
                     .done(this.onTrackFetchSuccess.bind(this, data))
                     .fail(this.onTrackFetchFailure.bind(this));
 
-                this.set('track', track);
+                data.track = track;
+
+                this.set(data);
             } else {
                 this.onTrackFetchSuccess(data);
             }
@@ -41,7 +43,6 @@ define([
             this.trigger('time');
         },
         onTrackFetchSuccess: function(data) {
-            this.set(data);
             this.trigger('status');
         },
         onTrackFetchFailure: function() {
