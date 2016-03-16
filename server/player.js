@@ -36,13 +36,24 @@ function getFeatures(player) {
 }
 
 function setStatus(data) {
+    var changed = [];
+
     if(status.type === 'spotify') {
         _.each(data, function(value, key) {
+            if(status[key] !== value) {
+                changed.push(key);
+            }
             status[key] = value;
         });
     }
 
-    instance.emit('status', status);
+    if(changed.length > 0) {
+        if(changed.length === 1 && changed[0] === 'position') {
+            instance.emit('time', status.position);
+        } else {
+            instance.emit('status', status);
+        }
+    }
 }
 
 function resetStatus() {
@@ -117,12 +128,18 @@ Player.prototype.getFeatures = function() {
     return playerFeatures[status.type];
 };
 
+Player.prototype.getStatus = function() {
+    return status;
+};
+
 Player.prototype.hasFeature = function(feature) {
     if(!status.type) {
         return false;
     }
-    return this.getFeatures().indexOf(feature) > -1;
+    return (this.getFeatures().indexOf(feature) > -1);
 };
+
+Player.prototype.mapFeature = mapFeature;
 
 _.each(features, function(feat) {
     var func = mapFeature(feat);

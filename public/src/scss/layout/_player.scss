@@ -1,0 +1,222 @@
+body {
+    padding-bottom: 54px;
+}
+
+.view-player {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    height: 44px;
+    background: $grayMedium;
+    border-top: 1px solid rgba($grayDark, 0.2);
+    transition: height $transition;
+    z-index: 9;
+
+    &.visible {
+        bottom: 0;
+    }
+
+    .player-scrubber-pane {
+        transition: background $transition;
+        position: absolute;
+        top: 0;
+        height: 2px;
+        left: 0;
+        right: 0;
+        background: $grayLight;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            bottom: -10px;
+            right: 0;
+            left: 0;
+        }
+
+        .front {
+            background: $accent;
+            height: 2px;
+            position: relative;
+        }
+
+        .handle {
+            transition: background $transition, box-shadow $transition, opacity $transition;
+            position: absolute;
+            opacity: 0;
+            width: 10px;
+            height: 10px;
+            border: 5px solid $accent;
+            border-radius: 20px;
+            right: 0;
+            top: 50%;
+            margin-top: -10px;
+            margin-right: -10px;
+            background: $accent;
+            cursor: pointer;
+
+            .no-touchevents &:hover {
+                background: #fff;
+                box-shadow: 0 0 3px rgba(#000, 0.4);
+            }
+
+            .touchevents & {
+                opacity: 1;
+                background: #fff;
+            }
+        }
+
+        .no-touchevents &:hover {
+            background: #fff;
+        }
+    }
+
+    .no-touchevents &:hover,
+    .touchevents {
+        .player-scrubber-pane .handle {
+            opacity: 1;
+        }
+    }
+
+    .player-mobile {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: 80px;
+        @extend %clearfix;
+
+        a {
+            float: left;
+            width: 40px;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+
+            .icon {
+                vertical-align: middle;
+                display: inline-block;
+            }
+        }
+    }
+
+    .player-collapse {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: center;
+        line-height: 40px;
+        display: none;
+
+        .icon {
+            vertical-align: middle;
+            display: inline-block;
+        }
+    }
+
+    .player-details {
+        position: relative;
+        height: 100%;
+        padding-left: 44px + 10px;
+        padding-top: 10px;
+        padding-right: 80px;
+
+        .image {
+            width: 44px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        font-size: 12px;
+
+        .artist {
+            display: block;
+            margin-bottom: 1px;
+        }
+
+        .name {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            height: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.expanded {
+        box-sizing: border-box;
+        height: 100%;
+        padding-top: 80px;
+        text-align: center;
+
+        .player-mobile {
+            display: none;
+        }
+
+        .player-collapse {
+            display: block;
+            z-index: 3;
+        }
+
+        .player-details {
+            box-sizing: border-box;
+            display: inline-block;
+            margin: 0 auto;
+            position: relative;
+            height: auto;
+            padding: 40px 10px 40px 120px;
+            min-height: 160px;
+            text-align: left;
+            @extend %clearfix;
+            width: 280px;
+
+            .image {
+                width: 100px;
+                left: 10px;
+                top: 40px;
+            }
+
+            .artist,
+            .name {
+                font-size: 16px;
+                line-height: 22px;
+            }
+
+            .name {
+                overflow: visible;
+                white-space: normal;
+                margin-top: 5px;
+            }
+        }
+
+        .player-scrubber {
+            position: relative;
+            width: 260px;
+            margin: 10px auto 30px;
+        }
+    }
+
+    .no-touchevents & [data-player-control] {
+        transition: opacity $transition;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    .player-controls {
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 10px 5px;
+        }
+    }
+}

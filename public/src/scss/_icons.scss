@@ -41,3 +41,43 @@
 .icon-star-empty {
     @include sprite($star-empty);
 }
+
+.icon-play-small {
+    @include sprite($play-small);
+}
+
+.icon-pause-small {
+    @include sprite($pause-small);
+}
+
+.icon-arrow-up {
+    @include sprite($arrow-up);
+}
+
+.icon-arrow-down {
+    @include sprite($arrow-down);
+}
+
+.icon-play {
+    @include sprite($play);
+}
+
+.icon-pause {
+    @include sprite($pause);
+}
+
+.icon-forward {
+    @include sprite($forward);
+}
+
+.icon-rewind {
+    @include sprite($rewind);
+}
+
+.icon-next {
+    @include sprite($next);
+}
+
+.icon-previous {
+    @include sprite($previous);
+}

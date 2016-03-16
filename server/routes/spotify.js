@@ -34,7 +34,7 @@ var routes = [
     'getCategories', 'getCategoryPlaylists',
     'getArtist', 'getArtistAlbums', 'getArtistTopTracks',
     'getAlbum', 'getAlbumTracks',
-    'getPlaylist', 'getPlaylistTracks'
+    'getPlaylist', 'getPlaylistTracks', 'getTrack'
 ];
 
 var handlers = {};

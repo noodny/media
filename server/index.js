@@ -40,12 +40,17 @@ app.get('/spotify/my-tracks', routes.spotify.getMyTracks);
 app.get('/spotify/categories', routes.spotify.getCategories);
 app.get('/spotify/categories/:id', routes.spotify.getCategoryPlaylists);
 app.get('/spotify/featured-playlists', routes.spotify.getFeaturedPlaylists);
+app.get('/spotify/tracks/:id', routes.spotify.getTrack);
 app.get('/spotify/artists/:id', routes.spotify.getArtist);
 app.get('/spotify/artists/:id/albums', routes.spotify.getArtistAlbums);
 app.get('/spotify/artists/:id/tracks', routes.spotify.getArtistTopTracks);
 app.get('/spotify/albums/:id', routes.spotify.getAlbum);
 app.get('/spotify/albums/:id/tracks', routes.spotify.getAlbumTracks);
 app.get('/spotify/playlists/:uri', routes.spotify.getPlaylist);
+
+app.get('/player/status', function(req, res, next) {
+    res.send(player.getStatus());
+});
 
 app.get('/player/open', function(req, res, next) {
     player.open(req.query.type, req.query.id);
@@ -100,6 +105,13 @@ player.on('status', function(data) {
     io.emit('player:status', data);
 });
 
+player.on('time', function(data) {
+    if(process.env.NODE_ENV !== 'production') {
+        console.log('player:time', data);
+    }
+    io.emit('player:time', data);
+});
+
 // io.emit('player:time')
 
 io.on('connection', function(socket) {
@@ -115,9 +127,10 @@ io.on('connection', function(socket) {
     });
 
     socket.on('player:command', function(data) {
+        console.log('player:command', data);
         if(player.hasFeature(data.command)) {
-            var func = player.mapFeature(data.parameters);
-
+            var func = player.mapFeature(data.command);
+            console.log(func);
             player[func](data.parameters);
         }
     });

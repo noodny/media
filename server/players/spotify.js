@@ -83,6 +83,12 @@ var SpotifyPlayer = function() {
     }).then(function() {
         this.ready = true;
         this.emit('ready');
+
+        setInterval(function() {
+            spop.status().then(function(status) {
+                setStatus(status);
+            });
+        }, 2000);
     }.bind(this), function(error) {
         console.error('SPOP: Error connecting to server.', error);
     });

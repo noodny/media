@@ -1,33 +1,57 @@
-<section class="view-player">
-    <div class="player-details">
-        <span class="player-details-title"></span>
-        <img class="player-details-image" src="" />
-    </div>
-    <div class="player-scrubber">
-        <div class="player-scrubber-pane">
-            <div class="back"></div>
-            <div class="front"></div>
+<div class="player-details">
+    <% if(type === 'spotify') { %>
+        <% if(track) { %>
+            <% if(track.get('artists')){ %>
+            <span class="artist"><%= track.get('artists').first().get('name') %></span>
+            <% } %>
+            <span class="name"><%= track.get('name') %></span>
+            <% if(track.get('image')) { %>
+            <img class="image" src="<%= track.get('image') %>"/>
+            <% } %>
+        <% } %>
+    <% } %>
+</div>
+<div class="player-mobile">
+    <% if(state === 'playing') { %>
+    <a href="#" data-player-control="toggle" class="player-pause"><i class="icon icon-pause-small"></i></a>
+    <% } else { %>
+    <a href="#" data-player-control="toggle" class="player-play"><i class="icon icon-play-small"></i></a>
+    <% } %>
+    <a href="#" class="player-expand"><i class="icon icon-arrow-up"></i></a>
+</div>
+<div class="player-scrubber">
+    <div class="player-scrubber-pane">
+        <div class="front" style="width: <%= position %>%;">
             <div class="handle"></div>
         </div>
-        <div class="player-scrubber-time">
-            <span class="from"></span>
-            <span class="to"></span>
-        </div>
     </div>
-    <div class="player-controls">
-        <a href="" class="icon player-back"></a>
-        <a href="" class="icon player-play"></a>
-        <a href="" class="icon player-pause"></a>
-        <a href="" class="icon player-forward"></a>
+    <div class="player-scrubber-time">
+        <span class="from"></span>
+        <span class="to"></span>
     </div>
-    <div class="player-misc">
-        <a href="" class="player-subtitles">
-            <i class="icon icon-cc"></i>
-            <span></span>
-        </a>
-        <a href="" class="player-output">
-            <i class="icon icon-speaker"></i>
-            <span></span>
-        </a>
-    </div>
-</section>
+</div>
+<div class="player-controls">
+    <% if(type === 'spotify') { %>
+    <a href="#" data-player-control="previous" class="player-previous icon icon-previous"></a>
+    <% if(state === 'playing') { %>
+    <a href="#" data-player-control="toggle" class="player-pause icon icon-pause"></a>
+    <% } else { %>
+    <a href="#" data-player-control="toggle" class="player-play icon icon-play"></a>
+    <% } %>
+    <a href="#" data-player-control="next" class="player-next icon icon-next"></a>
+    <% } else { %>
+    <a href="#" data-player-control="rewind" class="player-rewind icon icon-rewind"></a>
+    <a href="#" data-player-control="forward" class="player-forward icon icon-forward"></a>
+    <% } %>
+</div>
+<div class="player-misc">
+    <a href="#" class="icon player-subtitles">
+        <i class="icon icon-cc"></i>
+        <span></span>
+    </a>
+    <a href="#" class="icon-player-output">
+        <i class="icon icon-speaker"></i>
+        <span></span>
+    </a>
+</div>
+<a href="#" class="player-collapse"><i class="icon icon-arrow-down"></i></a>

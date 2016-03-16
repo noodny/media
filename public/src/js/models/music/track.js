@@ -1,7 +1,8 @@
 define([
+    'config',
     'collections/music/artists',
     'utils/date'
-], function(ArtistsCollection, date) {
+], function(config, ArtistsCollection, date) {
     var Model = Backbone.Model.extend({
         defaults: {
             id: null,
@@ -9,6 +10,10 @@ define([
             name: null,
             duration: 0,
             artists: null
+        },
+
+        url: function() {
+            return config.apiUrl + 'spotify/tracks/' + this.get('id');
         },
 
         getDuration: function() {
@@ -29,6 +34,10 @@ define([
 
             if(data.artists) {
                 parsed.artists = new ArtistsCollection(data.artists, {parse: true});
+            }
+
+            if(data.album && data.album.images && data.album.images.length) {
+                    parsed.image = data.album.images[0].url;
             }
 
             return parsed;
