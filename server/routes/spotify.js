@@ -4,8 +4,8 @@ var spotify = require('./../spotify');
 function proxyRoute(name) {
     return function(req, res, next) {
         var options = {
-            limit: req.query.limit || 20,
-            offset: req.query.offset || 0
+            limit: req.query.limit,
+            offset: req.query.offset
         };
 
         _.each(req.params, function(value, key) {

@@ -7,6 +7,8 @@ var apiUrl = 'https://api.spotify.com/v1/';
 var authUrl = 'https://accounts.spotify.com/api/token';
 var token = null;
 
+var DEFAULT_LIMIT = config.spotify.limit || 20;
+
 function authorize() {
     return new Promise(function(resolve, reject) {
         if(token) {
@@ -122,7 +124,7 @@ module.exports = {
         return requestAuthorized({
             url: 'browse/featured-playlists',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL'
             }
@@ -134,7 +136,7 @@ module.exports = {
         return requestAuthorized({
             url: 'me/tracks',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL'
             }
@@ -146,7 +148,7 @@ module.exports = {
         return requestAuthorized({
             url: 'me/playlists',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL'
             }
@@ -158,7 +160,7 @@ module.exports = {
         return requestAuthorized({
             url: 'browse/categories',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL',
                 locale: 'pl_PL'
@@ -171,7 +173,7 @@ module.exports = {
         return requestAuthorized({
             url: 'browse/categories/' + options.id + '/playlists',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL'
             }
@@ -193,7 +195,7 @@ module.exports = {
         return requestAuthorized({
             url: 'artists/' + options.id + '/albums',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL',
                 market: 'PL',
@@ -227,7 +229,7 @@ module.exports = {
         return requestAuthorized({
             url: 'albums/' + options.id + '/tracks',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL'
             }
@@ -253,7 +255,7 @@ module.exports = {
         return requestAuthorized({
             url: 'users/' + uri.userId + '/playlists/' + uri.id + '/tracks',
             qs: {
-                limit: options.limit || 20,
+                limit: options.limit || DEFAULT_LIMIT,
                 offset: options.offset || 0,
                 country: 'PL'
             }
