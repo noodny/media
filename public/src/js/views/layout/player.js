@@ -16,7 +16,19 @@ define([
             this.model.fetch()
                 .done(this.onPlayerFetch.bind(this));
 
-            window.player = this;
+            $('body').on('click', '[data-play-id]', function(event) {
+                event.preventDefault();
+
+                var $el = $(event.currentTarget);
+                var id = $el.data('play-id');
+                var type = $el.data('play-type');
+
+                // TODO: check if current view is the playlist context and use spop.goto
+                this.model.open({
+                    type: type,
+                    id: id
+                });
+            }.bind(this));
         },
         render: function() {
             this.$el.html(_.template(template, {

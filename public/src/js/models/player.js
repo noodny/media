@@ -47,6 +47,9 @@ define([
         onTrackFetchFailure: function() {
             console.error('PlayerView: track fetch failed');
         },
+        open: function(data) {
+            Socket.emit('player:open', data);
+        },
         command: function(command) {
             Socket.emit('player:command', {command: command});
         },

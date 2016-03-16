@@ -105,7 +105,7 @@ player.on('status', function(data) {
 });
 
 player.on('time', function(data) {
-    if(process.env.NODE_ENV !== 'production') {
+    if(process.env.NODE_ENV !== 'production' && process.env.VERBOSE === true) {
         console.log('player:time', data);
     }
     io.emit('player:time', data);
@@ -120,6 +120,10 @@ io.on('connection', function(socket) {
     // use socket.on(event) to listen to events from a client
 
     socket.on('player:open', function(data) {
+        if(process.env.NODE_ENV !== 'production') {
+            console.log('player:open', data);
+        }
+
         player.open(data.type, data.id);
     });
 

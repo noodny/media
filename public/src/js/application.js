@@ -33,17 +33,6 @@ define([
 
                         socket.initialize();
                         this.router.start();
-
-                        //TODO: remove
-                        $('body').on('click', '[data-play-id]', function(event) {
-                            event.preventDefault();
-
-                            var $el = $(event.currentTarget);
-                            var id = $el.data('play-id');
-                            var type = $el.data('play-type');
-
-                            $.get(config.apiUrl + 'player/open?id=' + id + '&type=' + type);
-                        })
                     }.bind(this));
             },
             setCurrentView: function(View, options) {
