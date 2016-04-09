@@ -1,5 +1,9 @@
 body {
     padding-bottom: 54px;
+
+    @include media(tablet) {
+        padding-bottom: 80px;
+    }
 }
 
 .view-player {
@@ -13,12 +17,17 @@ body {
     transition: height $transition;
     z-index: 9;
 
+    @include media(tablet) {
+        height: 70px;
+    }
+
     &.visible {
         bottom: 0;
     }
 
     .player-scrubber {
         .player-scrubber-pane {
+            cursor: pointer;
             -webkit-appearance: none;
             margin: 0;
             height: 2px;
@@ -28,6 +37,15 @@ body {
             top: 0;
             left: 0;
             right: 0;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: 0;
+                right: 0;
+                bottom: -10px;
+            }
 
             &:focus {
                 outline: none;
@@ -60,10 +78,6 @@ body {
                     height: 20px;
                 }
             }
-
-            &:focus::-webkit-slider-runnable-track {
-                background: lighten($grayLight, 10%);
-            }
         }
 
         .player-scrubber-progress {
@@ -83,6 +97,10 @@ body {
         top: 0;
         width: 80px;
         @extend %clearfix;
+
+        @include media(tablet) {
+            display: none;
+        }
 
         a {
             float: left;
@@ -121,19 +139,40 @@ body {
         padding-top: 10px;
         padding-right: 80px;
 
+        @include media(tablet) {
+            display: inline-block;
+            box-sizing: border-box;
+            padding-left: 70px + 15px;
+            padding-top: 15px;
+            padding-right: 15px;
+            max-width: 300px;
+        }
+
         .image {
             width: 44px;
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
+
+            @include media(tablet) {
+                width: 70px;
+            }
         }
 
         font-size: 12px;
 
+        @include media(tablet) {
+            font-size: 15px;
+        }
+
         .artist {
             display: block;
             margin-bottom: 1px;
+
+            @include media(tablet) {
+                margin-bottom: 2px;
+            }
         }
 
         .name {
@@ -144,6 +183,11 @@ body {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            @include media(tablet) {
+                height: 22px;
+                font-size: 17px;
+            }
         }
     }
 
@@ -209,13 +253,37 @@ body {
     }
 
     .player-controls {
+        @include media(tablet) {
+            position: absolute;
+            top: 0;
+            left: 300px;
+            right: 0;
+            bottom: 0;
+            line-height: 70px;
+        }
+
         a {
             display: inline-block;
             vertical-align: middle;
             margin: 10px 5px;
+
+            @include media(tablet) {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        .player-controls-main {
+            @include media(tablet) {
+                float: left;
+            }
         }
 
         .player-controls-additional {
+            @include media(tablet) {
+                float: right;
+            }
+
             a {
                 width: 40px;
                 height: 40px;

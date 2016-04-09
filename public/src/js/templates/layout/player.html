@@ -1,14 +1,14 @@
 <div class="player-details">
     <% if(type === 'spotify') { %>
-        <% if(track) { %>
-            <% if(track.get('artists')){ %>
-            <span class="artist"><%= track.get('artists').first().get('name') %></span>
-            <% } %>
-            <span class="name"><%= track.get('name') %></span>
-            <% if(track.get('image')) { %>
-            <img class="image" src="<%= track.get('image') %>"/>
-            <% } %>
-        <% } %>
+    <% if(track) { %>
+    <% if(track.get('artists')){ %>
+    <span class="artist"><%= track.get('artists').first().get('name') %></span>
+    <% } %>
+    <span class="name"><%= track.get('name') %></span>
+    <% if(track.get('image')) { %>
+    <img class="image" src="<%= track.get('image') %>"/>
+    <% } %>
+    <% } %>
     <% } %>
 </div>
 <div class="player-mobile">
@@ -29,16 +29,20 @@
 </div>
 <div class="player-controls">
     <% if(type === 'spotify') { %>
-    <a href="#" data-player-control="previous" class="player-previous icon icon-previous"></a>
-    <% if(state === 'playing') { %>
-    <a href="#" data-player-control="toggle" class="player-pause icon icon-pause"></a>
-    <% } else { %>
-    <a href="#" data-player-control="toggle" class="player-play icon icon-play"></a>
-    <% } %>
-    <a href="#" data-player-control="next" class="player-next icon icon-next"></a>
+    <div class="player-controls-main">
+        <a href="#" data-player-control="previous" class="player-previous icon icon-previous"></a>
+        <% if(state === 'playing') { %>
+        <a href="#" data-player-control="toggle" class="player-pause icon icon-pause"></a>
+        <% } else { %>
+        <a href="#" data-player-control="toggle" class="player-play icon icon-play"></a>
+        <% } %>
+        <a href="#" data-player-control="next" class="player-next icon icon-next"></a>
+    </div>
     <div class="player-controls-additional">
-        <a href="#" data-player-control="shuffle" class="player-shuffle"><i class="icon icon-shuffle<%= shuffle ? '-active' : '' %>"></i></a>
-        <a href="#" data-player-control="repeat" class="player-repeat"><i class="icon icon-repeat<%= repeat ? '-active' : '' %>"></i></a>
+        <a href="#" data-player-control="shuffle" class="player-shuffle"><i
+            class="icon icon-shuffle<%= shuffle ? '-active' : '' %>"></i></a>
+        <a href="#" data-player-control="repeat" class="player-repeat"><i
+            class="icon icon-repeat<%= repeat ? '-active' : '' %>"></i></a>
     </div>
     <% } else { %>
     <a href="#" data-player-control="rewind" class="player-rewind icon icon-rewind"></a>
