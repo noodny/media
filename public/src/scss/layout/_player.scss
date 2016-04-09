@@ -37,6 +37,12 @@ body {
             top: 0;
             left: 0;
             right: 0;
+            z-index: 2;
+            transition: background $transition;
+
+            @include media(web) {
+                height: 3px;
+            }
 
             &:before {
                 content: '';
@@ -87,6 +93,20 @@ body {
             left: 0;
             height: 2px;
             background: $accent;
+            z-index: 3;
+
+            @include media(web) {
+                height: 3px;
+            }
+        }
+
+        .no-touchevents &:hover {
+            .player-scrubber-pane {
+                background: lighten($grayLight, 20%);
+            }
+            .player-scrubber-progress {
+                background: lighten($accent, 10%);
+            }
         }
     }
 
@@ -140,12 +160,15 @@ body {
         padding-right: 80px;
 
         @include media(tablet) {
+            background: $grayMedium;
             display: inline-block;
             box-sizing: border-box;
             padding-left: 70px + 15px;
             padding-top: 15px;
             padding-right: 15px;
             max-width: 300px;
+            transition: max-width 0.3s ease-in-out;
+            z-index: 1;
         }
 
         .image {
@@ -187,6 +210,12 @@ body {
             @include media(tablet) {
                 height: 22px;
                 font-size: 17px;
+            }
+        }
+
+        @include media(tablet) {
+            .no-touchevents &:hover {
+                max-width: 100%;
             }
         }
     }
