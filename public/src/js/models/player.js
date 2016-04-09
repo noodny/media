@@ -52,7 +52,7 @@ define([
         open: function(data) {
             Socket.emit('player:open', data);
         },
-        command: function(command) {
+        command: function(command, parameters) {
             if(command === 'toggle') {
                 if(this.get('state') === 'playing') {
                     this.set('state', 'paused');
@@ -61,7 +61,10 @@ define([
                 }
                 this.trigger('status');
             }
-            Socket.emit('player:command', {command: command});
+            if(parameters && !_.isArray(parameters)) {
+                parameters = [parameters];
+            }
+            Socket.emit('player:command', {command: command, parameters: parameters || []});
         },
         getPosition: function() {
             var position = this.get('position') / (this.get('duration') / 1000) * 100;

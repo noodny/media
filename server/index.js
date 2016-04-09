@@ -134,7 +134,7 @@ io.on('connection', function(socket) {
 
         if(player.hasFeature(data.command)) {
             var func = player.mapFeature(data.command);
-            player[func](data.parameters);
+            player[func].apply(player, data.parameters);
         }
     });
 });

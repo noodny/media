@@ -8,7 +8,7 @@ define([
             'click .player-details, .player-expand': 'onPlayerDetailsClick',
             'click .player-collapse': 'onPlayerCollapseClick',
             'click [data-player-control]': 'onPlayerControlClick',
-            'click .player-scrubber': 'onScrubberClick'
+            'click .player-scrubber': 'onPlayerScrubberClick'
         },
         initialize: function() {
             this.model = new Player();
@@ -43,7 +43,8 @@ define([
             this.$title = this.$('.title');
             this.$artists = this.$('.artists');
             this.$playlist = this.$('.playlist');
-            this.$scrubber = this.$('.player-scrubber .front');
+            this.$scrubber = this.$('.player-scrubber');
+            this.$scrubberActive = this.$('.player-scrubber .front');
         },
         onPlayerFetch: function() {
             if(this.model.get('state') === 'idle') {
@@ -57,7 +58,7 @@ define([
             this.render();
         },
         onTimeChange: function() {
-            this.$scrubber.width(this.model.getPosition() + '%');
+            this.$scrubberActive.width(this.model.getPosition() + '%');
         },
         onPlayerDetailsClick: function(event) {
             event.preventDefault();
@@ -80,6 +81,21 @@ define([
                 command = $el.data('player-control');
 
             this.model.command(command);
+        },
+        onPlayerScrubberClick: function(event) {
+            event.preventDefault();
+
+            var position = event.offsetX;
+            var total = this.$scrubber.width();
+
+            var percent = position/total;
+
+            var ms = percent * this.model.get('duration');
+
+            this.model.command('seek', ms);
+
+            // force the layout time change
+            this.model.onTime(ms/1000);
         }
     });
 
