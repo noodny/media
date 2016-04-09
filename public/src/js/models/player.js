@@ -64,7 +64,16 @@ define([
             if(parameters && !_.isArray(parameters)) {
                 parameters = [parameters];
             }
-            Socket.emit('player:command', {command: command, parameters: parameters || []});
+
+            var data = {
+                command: command
+            };
+
+            if(parameters) {
+                data.parameters = parameters;
+            }
+            
+            Socket.emit('player:command', data);
         },
         getPosition: function() {
             var position = this.get('position') / (this.get('duration') / 1000) * 100;

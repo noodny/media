@@ -8,7 +8,10 @@ define([
             'click .player-details, .player-expand': 'onPlayerDetailsClick',
             'click .player-collapse': 'onPlayerCollapseClick',
             'click [data-player-control]': 'onPlayerControlClick',
-            'click .player-scrubber': 'onPlayerScrubberClick'
+            'change .player-scrubber-pane': 'onPlayerScrubberChange',
+            'input .player-scrubber-pane': 'onPlayerScrubberInput',
+            'click .player-scrubber-pane': 'onPlayerScrubberClick',
+            'click .player-scrubber-progress': 'onPlayerScrubberClick'
         },
         initialize: function() {
             this.model = new Player();
@@ -43,8 +46,8 @@ define([
             this.$title = this.$('.title');
             this.$artists = this.$('.artists');
             this.$playlist = this.$('.playlist');
-            this.$scrubber = this.$('.player-scrubber');
-            this.$scrubberActive = this.$('.player-scrubber .front');
+            this.$scrubber = this.$('.player-scrubber-pane');
+            this.$scrubberProgress = this.$('.player-scrubber-progress');
         },
         onPlayerFetch: function() {
             if(this.model.get('state') === 'idle') {
@@ -58,7 +61,11 @@ define([
             this.render();
         },
         onTimeChange: function() {
-            this.$scrubberActive.width(this.model.getPosition() + '%');
+            if(this.dragging) {
+                return;
+            }
+            this.$scrubber.val(this.model.getPosition());
+            this.$scrubberProgress.width(this.model.getPosition() + '%');
         },
         onPlayerDetailsClick: function(event) {
             event.preventDefault();
@@ -82,20 +89,25 @@ define([
 
             this.model.command(command);
         },
-        onPlayerScrubberClick: function(event) {
-            event.preventDefault();
-
-            var position = event.offsetX;
-            var total = this.$scrubber.width();
-
-            var percent = position/total;
-
-            var ms = percent * this.model.get('duration');
+        onPlayerScrubberInput: function(event) {
+            this.dragging = true;
+            var value = this.$scrubber.val();
+            this.$scrubberProgress.width(value + '%');
+        },
+        onPlayerScrubberChange: function(event) {
+            var ms = (this.$scrubber.val()/100) * this.model.get('duration');
 
             this.model.command('seek', ms);
+            this.dragging = false;
 
             // force the layout time change
             this.model.onTime(ms/1000);
+        },
+        onPlayerScrubberClick: function(event) {
+            this.dragging = true;
+            var value = (event.offsetX / this.$scrubber.width()) * 100;
+            this.$scrubber.val(value);
+            this.$scrubber.trigger('change');
         }
     });
 
