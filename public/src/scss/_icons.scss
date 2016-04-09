@@ -81,3 +81,19 @@
 .icon-previous {
     @include sprite($previous);
 }
+
+.icon-shuffle {
+    @include sprite($shuffle);
+}
+
+.icon-repeat {
+    @include sprite($repeat);
+}
+
+.icon-shuffle-active {
+    @include sprite($shuffle-active);
+}
+
+.icon-repeat-active {
+    @include sprite($repeat-active);
+}

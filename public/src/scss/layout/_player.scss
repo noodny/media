@@ -218,5 +218,19 @@ body {
             vertical-align: middle;
             margin: 10px 5px;
         }
+
+        .player-controls-additional {
+            a {
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+
+                i {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
     }
 }

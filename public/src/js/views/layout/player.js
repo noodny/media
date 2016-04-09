@@ -7,7 +7,8 @@ define([
         events: {
             'click .player-details, .player-expand': 'onPlayerDetailsClick',
             'click .player-collapse': 'onPlayerCollapseClick',
-            'click [data-player-control]': 'onPlayerControlClick'
+            'click [data-player-control]': 'onPlayerControlClick',
+            'click .player-scrubber': 'onScrubberClick'
         },
         initialize: function() {
             this.model = new Player();
@@ -35,6 +36,8 @@ define([
                 type: this.model.get('type'),
                 state: this.model.get('state'),
                 track: this.model.get('track'),
+                repeat: this.model.get('repeat'),
+                shuffle: this.model.get('shuffle'),
                 position: this.model.getPosition()
             }));
             this.$title = this.$('.title');

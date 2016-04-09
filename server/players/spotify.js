@@ -49,7 +49,7 @@ function setStatus(data) {
     }
 
     function trySetting(key) {
-        if(data[key]) {
+        if(typeof data[key] !== 'undefined') {
             status[key] = data[key];
         }
     }
@@ -88,7 +88,7 @@ var SpotifyPlayer = function() {
             spop.status().then(function(status) {
                 setStatus(status);
             });
-        }, 2000);
+        }, 1000);
     }.bind(this), function(error) {
         console.error('SPOP: Error connecting to server.', error);
     });

@@ -20,6 +20,7 @@ define([
                 }
 
                 if(this.get('track') && this.get('track').get('id') === data.trackId) {
+                    this.set(data);
                     return this.onTrackFetchSuccess(data);
                 }
 
@@ -52,6 +53,14 @@ define([
             Socket.emit('player:open', data);
         },
         command: function(command) {
+            if(command === 'toggle') {
+                if(this.get('state') === 'playing') {
+                    this.set('state', 'paused');
+                } else {
+                    this.set('state', 'playing');
+                }
+                this.trigger('status');
+            }
             Socket.emit('player:command', {command: command});
         },
         getPosition: function() {

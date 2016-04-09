@@ -39,6 +39,10 @@
     <a href="#" data-player-control="toggle" class="player-play icon icon-play"></a>
     <% } %>
     <a href="#" data-player-control="next" class="player-next icon icon-next"></a>
+    <div class="player-controls-additional">
+        <a href="#" data-player-control="shuffle" class="player-shuffle"><i class="icon icon-shuffle<%= shuffle ? '-active' : '' %>"></i></a>
+        <a href="#" data-player-control="repeat" class="player-repeat"><i class="icon icon-repeat<%= repeat ? '-active' : '' %>"></i></a>
+    </div>
     <% } else { %>
     <a href="#" data-player-control="rewind" class="player-rewind icon icon-rewind"></a>
     <a href="#" data-player-control="forward" class="player-forward icon icon-forward"></a>
