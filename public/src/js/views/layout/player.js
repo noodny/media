@@ -22,7 +22,7 @@ define([
 
             $('body').on('click', '[data-play-id]', function(event) {
                 event.preventDefault();
-                
+
                 var $el = $(event.currentTarget);
                 var id = $el.data('play-id');
                 var type = $el.data('play-type');
@@ -58,13 +58,15 @@ define([
                 this.$el.addClass('visible');
             }
 
-            this.$el.attr('class', function(i, cls) {
-                if(/player-/.test(cls)) {
-                    return cls.replace(/player-[^ ]*]/, 'player-' + this.model.get('type'));
-                } else {
-                    return cls + ' player-' + this.model.get('type');
-                }
-            }.bind(this))
+            var type = this.model.get('type');
+
+            this.$el.removeClass(function(index, css) {
+                return (css.match(/(^|\s)player-\S+/g) || []).join(' ');
+            });
+
+            if(type) {
+                this.$el.addClass('player-' + type);
+            }
         },
         onStatusChange: function() {
             this.onPlayerFetch();

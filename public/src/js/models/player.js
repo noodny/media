@@ -38,6 +38,7 @@ define([
                 this.set(data);
             } else if(data.type === 'radio') {
                 if(data.id === null) {
+                    this.set(data);
                     return this.onTrackFetchSuccess(data);
                 }
 
@@ -50,13 +51,13 @@ define([
                     id: data.id
                 });
 
-                station.fetch()
-                    .done(this.onTrackFetchSuccess.bind(this, data))
-                    .fail(this.onTrackFetchFailure.bind(this));
-
                 data.station = station;
 
                 this.set(data);
+
+                station.fetch()
+                    .done(this.onTrackFetchSuccess.bind(this, data))
+                    .fail(this.onTrackFetchFailure.bind(this));
             } else {
                 this.onTrackFetchSuccess(data);
             }
