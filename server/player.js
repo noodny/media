@@ -38,14 +38,12 @@ function getFeatures(player) {
 function setStatus(data) {
     var changed = [];
 
-    if(status.type === 'spotify') {
-        _.each(data, function(value, key) {
-            if(status[key] !== value) {
-                changed.push(key);
-            }
-            status[key] = value;
-        });
-    }
+    _.each(data, function(value, key) {
+        if(status[key] !== value) {
+            changed.push(key);
+        }
+        status[key] = value;
+    });
 
     if(changed.length > 0) {
         if(changed.length === 1 && changed[0] === 'position') {

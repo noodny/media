@@ -74,5 +74,20 @@ module.exports = {
                 return (ids.indexOf(station.id) > -1);
             }));
         }
+    },
+    getStation: function (req, res, next) {
+        var id = parseInt(req.params.id);
+
+        if(_.isNaN(id)) {
+            return res.status(404).send();
+        }
+
+        var station = db('stations').find({id: id});
+
+        if(station) {
+            res.send(station);
+        } else {
+            res.status(404).send();
+        }
     }
 };

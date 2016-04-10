@@ -39,6 +39,8 @@ define([
                 type: this.model.get('type'),
                 state: this.model.get('state'),
                 track: this.model.get('track'),
+                station: this.model.get('station'),
+                title: this.model.get('title'),
                 repeat: this.model.get('repeat'),
                 shuffle: this.model.get('shuffle'),
                 position: this.model.getPosition()
@@ -55,6 +57,14 @@ define([
             } else {
                 this.$el.addClass('visible');
             }
+
+            this.$el.attr('class', function(i, cls) {
+                if(/player-/.test(cls)) {
+                    return cls.replace(/player-[^ ]*]/, 'player-' + this.model.get('type'));
+                } else {
+                    return cls + ' player-' + this.model.get('type');
+                }
+            }.bind(this))
         },
         onStatusChange: function() {
             this.onPlayerFetch();
@@ -95,13 +105,13 @@ define([
             this.$scrubberProgress.width(value + '%');
         },
         onPlayerScrubberChange: function(event) {
-            var ms = (this.$scrubber.val()/100) * this.model.get('duration');
+            var ms = (this.$scrubber.val() / 100) * this.model.get('duration');
 
             this.model.command('seek', ms);
             this.dragging = false;
 
             // force the layout time change
-            this.model.onTime(ms/1000);
+            this.model.onTime(ms / 1000);
         },
         onPlayerScrubberClick: function(event) {
             this.dragging = true;

@@ -1,8 +1,9 @@
 define([
     'config',
     'socket',
-    'models/music/track'
-], function(config, Socket, Track) {
+    'models/music/track',
+    'models/music/station'
+], function(config, Socket, Track, Station) {
     var Player = Backbone.Model.extend({
         url: config.apiUrl + 'player/status',
         initialize: function() {
@@ -33,6 +34,27 @@ define([
                     .fail(this.onTrackFetchFailure.bind(this));
 
                 data.track = track;
+
+                this.set(data);
+            } else if(data.type === 'radio') {
+                if(data.id === null) {
+                    return this.onTrackFetchSuccess(data);
+                }
+
+                if(this.get('station') && this.get('station').get('id') === data.id) {
+                    this.set(data);
+                    return this.onTrackFetchSuccess(data);
+                }
+
+                var station = new Station({
+                    id: data.id
+                });
+
+                station.fetch()
+                    .done(this.onTrackFetchSuccess.bind(this, data))
+                    .fail(this.onTrackFetchFailure.bind(this));
+
+                data.station = station;
 
                 this.set(data);
             } else {
@@ -72,7 +94,7 @@ define([
             if(parameters) {
                 data.parameters = parameters;
             }
-            
+
             Socket.emit('player:command', data);
         },
         getPosition: function() {

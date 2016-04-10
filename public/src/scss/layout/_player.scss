@@ -327,4 +327,24 @@ body {
             }
         }
     }
+
+    &.player-radio {
+        .player-mobile {
+            width: 40px;
+        }
+
+        .player-details {
+            padding-right: 40px;
+
+            @include media(tablet) {
+                max-width: 500px;
+            }
+        }
+
+        .player-controls {
+            @include media(tablet) {
+                left: auto;
+            }
+        }
+    }
 }

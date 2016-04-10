@@ -26,6 +26,7 @@ app.use(parser.json());
 //app.get('/search/downloads', routes.search.downloads);
 //
 app.get('/radio/stations', routes.radio.getStations);
+app.get('/radio/stations/:id', routes.radio.getStation);
 app.get('/radio/categories', routes.radio.getCategories);
 app.get('/radio/countries', routes.radio.getCountries);
 app.get('/radio/pinned', routes.radio.getPinned);
