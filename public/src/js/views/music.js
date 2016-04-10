@@ -2,9 +2,10 @@ define([
     'views/search',
     'views/music/lists/playlists',
     'views/music/lists/tracks',
-    'collections/music/radios',
-    'text!templates/music.html'
-], function(SearchView, PlaylistsView, TracksView, RadiosCollection, template) {
+    'collections/music/radio/stations',
+    'text!templates/music.html',
+    'text!templates/music/lists/items/station.html'
+], function(SearchView, PlaylistsView, TracksView, StationsCollection, template, stationTemplate) {
     var View = Backbone.View.extend({
         render: function() {
             this.$el.html(_.template(template));
@@ -28,21 +29,24 @@ define([
             });
             this.tracksView.render();
 
-            this.radios = new RadiosCollection([{
-                id: 1,
-                name: 'RMF Classic',
-                image: 'http://cdn-radiotime-logos.tunein.com/s48202q.png',
-                stream: '',
-                categories: ['Classic', 'Oldies'],
-                starred: true
-            }, {
-                id: 2,
-                name: 'RMF Gold',
-                image: 'http://cdn-radiotime-logos.tunein.com/s76609q.png',
-                stream: '',
-                categories: ['Oldies'],
-                starred: true
-            }], {parse: true});
+            this.stations = new StationsCollection([], {
+                fetch: {
+                    pinned: true
+                }
+            });
+            this.$stations = this.$('.stations-list');
+            this.stations.fetch().done(this.onStationsFetchSuccess.bind(this));
+        },
+        onStationsFetchSuccess: function() {
+            var html = '';
+
+            this.stations.each(function(station) {
+                html += _.template(stationTemplate, {
+                    station: station
+                });
+            });
+
+            this.$stations.html(html).addClass('loaded');
         }
     });
 

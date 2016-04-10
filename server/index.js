@@ -25,13 +25,10 @@ app.use(parser.json());
 //app.get('/search/music', routes.search.music);
 //app.get('/search/downloads', routes.search.downloads);
 //
-//app.get('/radio/stations', routes.radio.getStations);
-//app.get('/radio/genres', routes.radio.getGenres);
-//app.get('/radio/countries', routes.radio.getCountries);
-//app.get('/radio/starred', routes.radio.getStarred);
-//
-//app.get('/player/status', routes.player.getStatus);
-//app.get('/player/features', routes.player.getFeatures);
+app.get('/radio/stations', routes.radio.getStations);
+app.get('/radio/categories', routes.radio.getCategories);
+app.get('/radio/countries', routes.radio.getCountries);
+app.get('/radio/pinned', routes.radio.getPinned);
 
 app.get('/spotify/my-playlists', routes.spotify.getMyPlaylists);
 app.get('/spotify/my-tracks', routes.spotify.getMyTracks);
@@ -84,8 +81,8 @@ app.get('/player/seek', function(req, res, next) {
     res.status(200).end();
 });
 
-app.post('/download');
-
+// app.post('/download');
+app.use('/radio-posters', express.static(__dirname + '/data/radio-posters'));
 if(process.env.NODE_ENV !== 'production') {
     app.use(middlewares.logRequest);
 }

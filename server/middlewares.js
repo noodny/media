@@ -9,7 +9,9 @@ module.exports = {
         next(err);
     },
     serverError: function(err, req, res, next) {
-        console.error(err.stack);
+        if(err.stack) {
+            console.error(err.stack);
+        }
         res.status(err.status || 500).json({
             message: err.message,
             error: process.env.NODE_ENV === 'production' ? err : {}

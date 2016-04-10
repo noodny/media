@@ -1,4 +1,4 @@
-define([], function() {
+define(['config'], function(config) {
     var Collection = Backbone.Collection.extend({
         model: Backbone.Model.extend({
             defaults: {
@@ -12,12 +12,8 @@ define([], function() {
 
         comparator: 'name',
 
-        parse: function(data) {
-            return _.map(data, function(el) {
-                return {
-                    name: el
-                };
-            });
+        url: function() {
+            return config.apiUrl + 'radio/categories';
         }
     });
 

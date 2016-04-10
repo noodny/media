@@ -7,3 +7,5 @@
 /public/src/scss/_sprites.scss
 
 /public/dist
+
+/server/data/preferences.json

@@ -1,5 +1,5 @@
 .items-list {
-    .list-item-radio,
+    .list-item-station,
     .list-item-playlist {
         background: $grayMedium;
         display: block;
@@ -568,7 +568,7 @@
         }
     }
 
-    .radio-genres,
+    .radio-categories,
     .radio-countries {
         @include media(tablet-big) {
             float: left;
@@ -584,7 +584,7 @@
     }
 
     .radio-countries-list,
-    .radio-genres-list {
+    .radio-categories-list {
         @extend %clearfix;
         padding: 10px 5px 10px 15px;
         display: block;
@@ -635,7 +635,7 @@
         }
     }
 
-    .radios-list {
+    .stations-list {
         padding: 10px;
         @extend %clearfix;
 
@@ -648,7 +648,7 @@
         }
     }
 
-    .list-item-radio {
+    .list-item-station {
         @include media(smartphone-big) {
             box-sizing: border-box;
             float: left;

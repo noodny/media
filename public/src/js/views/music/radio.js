@@ -1,75 +1,79 @@
 define([
-    'collections/music/radios',
-    'collections/music/countries',
-    'collections/music/genres',
+    'collections/music/radio/stations',
+    'collections/music/radio/countries',
+    'collections/music/radio/categories',
     'views/search',
     'text!templates/music/radio.html',
-    'text!templates/music/radios-list.html'
-], function(RadiosCollection, CountriesCollection, GenresCollection, SearchView, template, radiosListTemplate) {
+    'text!templates/music/lists/stations.html',
+    'text!templates/music/lists/items/station.html'
+], function(StationsCollection, CountriesCollection, CategoriesCollection, SearchView, template, radiosListTemplate, stationTemplate) {
     var View = Backbone.View.extend({
         initialize: function(options, parameters) {
-            if(parameters && parameters.category) {
-                this.category = parameters.category;
+            if(parameters && parameters.filter) {
+                this.filter = parameters.filter;
             }
         },
         render: function() {
-            if(this.category) {
-                this.$el.html(_.template(radiosListTemplate, {
-                    radios: new RadiosCollection([{
-                        id: 1,
-                        name: 'RMF Classic',
-                        image: 'http://cdn-radiotime-logos.tunein.com/s48202q.png',
-                        stream: '',
-                        categories: ['Classic', 'Oldies'],
-                        starred: true
-                    }, {
-                        id: 2,
-                        name: 'RMF Gold',
-                        image: 'http://cdn-radiotime-logos.tunein.com/s76609q.png',
-                        stream: '',
-                        categories: ['Oldies'],
-                        starred: true
-                    },{
-                        id: 12,
-                        name: 'RMF Classic',
-                        image: 'http://cdn-radiotime-logos.tunein.com/s48202q.png',
-                        stream: '',
-                        categories: ['Classic', 'Oldies'],
-                        starred: true
-                    }, {
-                        id: 23,
-                        name: 'RMF Gold',
-                        image: 'http://cdn-radiotime-logos.tunein.com/s76609q.png',
-                        stream: '',
-                        categories: ['Oldies'],
-                        starred: true
-                    },{
-                        id: 14,
-                        name: 'RMF Classic',
-                        image: 'http://cdn-radiotime-logos.tunein.com/s48202q.png',
-                        stream: '',
-                        categories: ['Classic', 'Oldies'],
-                        starred: true
-                    }, {
-                        id: 25,
-                        name: 'RMF Gold',
-                        image: 'http://cdn-radiotime-logos.tunein.com/s76609q.png',
-                        stream: '',
-                        categories: ['Oldies'],
-                        starred: true
-                    }], {parse: true})
-                }));
+            if(this.filter) {
+                this.$el.html(_.template(radiosListTemplate));
+
+                this.$stations = this.$('.stations-list');
+
+                var filter = {};
+
+                if(this.filter.indexOf('category') === 0) {
+                    filter.category = this.filter.replace('category-', '');
+                }
+
+                if(this.filter.indexOf('country') === 0) {
+                    filter.country = this.filter.replace('country-', '');
+                }
+
+                this.stations = new StationsCollection([], {
+                    fetch: filter
+                });
+
+                this.stations.fetch().done(this.onStationsFetchSuccess.bind(this));
             } else {
-                this.$el.html(_.template(template, {
-                    countries: new CountriesCollection(['Polska', 'Węgry', 'Czechy', 'Rosja'], {parse: true}),
-                    genres: new GenresCollection(['Rock', 'Pop', 'Muzyka klasyczna', 'Jazz', 'Swing', 'Smooth Jazz'], {parse: true})
-                }));
+                this.$el.html(_.template(template));
+
+                this.countries = new CountriesCollection();
+                this.categories = new CategoriesCollection();
+
+                this.$countries = this.$('.radio-countries-list');
+                this.$categories = this.$('.radio-categories-list');
+
+                $.when(this.countries.fetch(), this.categories.fetch()).done(this.onRadioMetaFetch.bind(this))
             }
 
             this.searchView = new SearchView({
                 el: this.$('.view-search-container')
             });
             this.searchView.render();
+        },
+        onRadioMetaFetch: function() {
+            var categories = '';
+            this.categories.each(function(category) {
+                categories += '<li class="list-item list-item-category"><a href="#!/music/radio/category-' + category.get('id') + '">' + category.get('name') + '</a></li>';
+            });
+            this.$categories.html(categories).addClass('loaded');
+
+            var countries = '';
+            this.countries.each(function(country) {
+                countries += '<li class="list-item list-item-country"><a href="#!/music/radio/country-' + country.get('id') + '">' + country.get('name') + '</a></li>';
+            });
+            this.$countries.html(countries).addClass('loaded');
+        },
+        onStationsFetchSuccess: function() {
+            var html = '';
+
+            this.stations.each(function(station) {
+                html += _.template(stationTemplate, {
+                    station: station
+                });
+            });
+
+            this.$stations.html(html).addClass('loaded');
         }
     });
 

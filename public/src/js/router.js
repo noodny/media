@@ -23,7 +23,7 @@ define([
             "!/music": "music",
             "!/music/search/:query": "musicSearch",
             "!/music/browse": "musicBrowse",
-            "!/music/radio(/:category)": "musicRadio",
+            "!/music/radio(/:filter)": "musicRadio",
             "!/music/browse/category/:id": "musicBrowseCategory",
             "!/music/browse/playlist/:id": "musicBrowsePlaylist",
             "!/music/browse/artist/:id": "musicBrowseArtist",
@@ -64,8 +64,8 @@ define([
             this.trigger('viewChange', MusicBrowseAlbumView, {id: id});
         },
 
-        musicRadio: function(category) {
-            this.trigger('viewChange', MusicRadioView, {category: category});
+        musicRadio: function(filter) {
+            this.trigger('viewChange', MusicRadioView, {filter: filter});
         },
 
         photos: function() {

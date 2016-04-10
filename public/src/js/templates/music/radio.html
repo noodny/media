@@ -1,27 +1,17 @@
 <section class="view-music-radio page-wrapper">
     <section class="view-search-container"></section>
 
-    <div class="radio-genres">
-        <h2>Gatunki</h2>
+    <div class="radio-categories">
+        <h2>Kategorie</h2>
 
-        <ul class="items-list radio-genres-list loaded">
-            <% genres.each(function(genre) { %>
-            <li class="list-item list-item-genre">
-                <a href="#!/music/radio/genre-<%= genre.getSlug() %>"><%= genre.get('name') %></a>
-            </li>
-            <% }) %>
-        </ul>
+        <ul class="items-list radio-categories-list"></ul>
+        <div class="loader"></div>
     </div>
 
     <div class="radio-countries">
         <h2>Kraje</h2>
 
-        <ul class="items-list radio-countries-list loaded">
-            <% countries.each(function(country) { %>
-            <li class="list-item list-item-country">
-                <a href="#!/music/radio/country-<%= country.getSlug() %>"><%= country.get('name') %></a>
-            </li>
-            <% }) %>
-        </ul>
+        <ul class="items-list radio-countries-list"></ul>
+        <div class="loader"></div>
     </div>
 </section>
