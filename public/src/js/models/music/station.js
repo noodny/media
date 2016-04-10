@@ -2,7 +2,7 @@ define([
     'config'
 ], function(config) {
     var Model = Backbone.Model.extend({
-        defaults: { 
+        defaults: {
             id: null,
             title: null,
             urls: null,
@@ -17,7 +17,7 @@ define([
             if(!this.get('image')) {
                 return '';
             }
-            return config.apiUrl + 'radio-posters/' + this.get('image');
+            return config.baseUrl + 'radio-posters/' + this.get('image');
         }
     });
 

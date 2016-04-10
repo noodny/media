@@ -7,7 +7,7 @@ define([
     var instance,
         Application = {
             initialize: function(router) {
-                $.getScript(config.apiUrl + 'socket.io/socket.io.js')
+                $.getScript(config.baseUrl + 'socket.io/socket.io.js')
                     .done(function() {
                         this.$container = $('#page-container');
 

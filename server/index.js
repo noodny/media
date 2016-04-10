@@ -15,79 +15,79 @@ var routes = requireDir('./routes');
 app.use(cors());
 app.use(parser.json());
 
-//app.get('/movies', routes.movies.getMovies);
+//app.get('/api/movies', routes.movies.getMovies);
 //
-//app.get('/series', routes.series.getSeries);
-//app.get('/series/:id/episodes', routes.series.getEpisodes);
+//app.get('/api/series', routes.series.getSeries);
+//app.get('/api/series/:id/episodes', routes.series.getEpisodes);
 //
-//app.get('/search/movies', routes.search.movies);
-//app.get('/search/series', routes.search.series);
-//app.get('/search/music', routes.search.music);
-//app.get('/search/downloads', routes.search.downloads);
+//app.get('/api/search/movies', routes.search.movies);
+//app.get('/api/search/series', routes.search.series);
+//app.get('/api/search/music', routes.search.music);
+//app.get('/api/search/downloads', routes.search.downloads);
 //
-app.get('/radio/stations', routes.radio.getStations);
-app.get('/radio/stations/:id', routes.radio.getStation);
-app.get('/radio/categories', routes.radio.getCategories);
-app.get('/radio/countries', routes.radio.getCountries);
-app.get('/radio/pinned', routes.radio.getPinned);
+app.get('/api/radio/stations', routes.radio.getStations);
+app.get('/api/radio/stations/:id', routes.radio.getStation);
+app.get('/api/radio/categories', routes.radio.getCategories);
+app.get('/api/radio/countries', routes.radio.getCountries);
+app.get('/api/radio/pinned', routes.radio.getPinned);
 
-app.get('/spotify/my-playlists', routes.spotify.getMyPlaylists);
-app.get('/spotify/my-tracks', routes.spotify.getMyTracks);
-app.get('/spotify/categories', routes.spotify.getCategories);
-app.get('/spotify/categories/:id', routes.spotify.getCategoryPlaylists);
-app.get('/spotify/featured-playlists', routes.spotify.getFeaturedPlaylists);
-app.get('/spotify/tracks/:id', routes.spotify.getTrack);
-app.get('/spotify/artists/:id', routes.spotify.getArtist);
-app.get('/spotify/artists/:id/albums', routes.spotify.getArtistAlbums);
-app.get('/spotify/artists/:id/tracks', routes.spotify.getArtistTopTracks);
-app.get('/spotify/albums/:id', routes.spotify.getAlbum);
-app.get('/spotify/albums/:id/tracks', routes.spotify.getAlbumTracks);
-app.get('/spotify/playlists/:uri', routes.spotify.getPlaylist);
+app.get('/api/spotify/my-playlists', routes.spotify.getMyPlaylists);
+app.get('/api/spotify/my-tracks', routes.spotify.getMyTracks);
+app.get('/api/spotify/categories', routes.spotify.getCategories);
+app.get('/api/spotify/categories/:id', routes.spotify.getCategoryPlaylists);
+app.get('/api/spotify/featured-playlists', routes.spotify.getFeaturedPlaylists);
+app.get('/api/spotify/tracks/:id', routes.spotify.getTrack);
+app.get('/api/spotify/artists/:id', routes.spotify.getArtist);
+app.get('/api/spotify/artists/:id/albums', routes.spotify.getArtistAlbums);
+app.get('/api/spotify/artists/:id/tracks', routes.spotify.getArtistTopTracks);
+app.get('/api/spotify/albums/:id', routes.spotify.getAlbum);
+app.get('/api/spotify/albums/:id/tracks', routes.spotify.getAlbumTracks);
+app.get('/api/spotify/playlists/:uri', routes.spotify.getPlaylist);
 
-app.get('/player/status', function(req, res, next) {
+app.get('/api/player/status', function(req, res, next) {
     res.send(player.getStatus());
 });
 
 // TODO: remove REST player endpoints when testing phase is done
-app.get('/player/open', function(req, res, next) {
+app.get('/api/player/open', function(req, res, next) {
     player.open(req.query.type, req.query.id);
     res.status(200).end();
 });
-app.get('/player/toggle', function(req, res, next) {
+app.get('/api/player/toggle', function(req, res, next) {
     player.toggle();
     res.status(200).end();
 });
-app.get('/player/next', function(req, res, next) {
+app.get('/api/player/next', function(req, res, next) {
     player.next();
     res.status(200).end();
 });
-app.get('/player/previous', function(req, res, next) {
+app.get('/api/player/previous', function(req, res, next) {
     player.previous();
     res.status(200).end();
 });
-app.get('/player/shuffle', function(req, res, next) {
+app.get('/api/player/shuffle', function(req, res, next) {
     player.shuffle();
     res.status(200).end();
 });
-app.get('/player/repeat', function(req, res, next) {
+app.get('/api/player/repeat', function(req, res, next) {
     player.repeat();
     res.status(200).end();
 });
-app.get('/player/stop', function(req, res, next) {
+app.get('/api/player/stop', function(req, res, next) {
     player.stop();
     res.status(200).end();
 });
-app.get('/player/seek', function(req, res, next) {
+app.get('/api/player/seek', function(req, res, next) {
     player.seek(req.query.ms);
     res.status(200).end();
 });
 
-// app.post('/download');
+app.use('/', express.static(__dirname + '/../public/dist'));
 app.use('/radio-posters', express.static(__dirname + '/data/radio-posters'));
+
 if(process.env.NODE_ENV !== 'production') {
     app.use(middlewares.logRequest);
 }
-
 app.use(middlewares.clientError);
 app.use(middlewares.serverError);
 
