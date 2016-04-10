@@ -44,6 +44,14 @@ gulp.task('copy', function() {
         });
 });
 
+gulp.task('icons', function() {
+    return gulp
+        .src(src + 'img/icons/*', {base: src + 'img/icons/'})
+        .pipe($.if('*.png', $.imagemin()))
+        .pipe($.if('*.jpg', $.imagemin()))
+        .pipe(gulp.dest(dist));
+});
+
 gulp.task('sprites', function() {
     return sprity
         .src({
@@ -145,9 +153,9 @@ gulp.task('server', function() {
 var sequence;
 
 if(env === 'development') {
-    sequence = $.sequence('clean', 'copy', ['sprites', 'styles', 'scripts'], 'server', 'watch', 'sync');
+    sequence = $.sequence('clean', 'copy', 'icons', ['sprites', 'styles', 'scripts'], 'server', 'watch', 'sync');
 } else {
-    sequence = $.sequence('clean', 'copy', ['sprites', 'styles', 'scripts']);
+    sequence = $.sequence('clean', 'copy', 'icons', ['sprites', 'styles', 'scripts']);
 }
 
 gulp.task('default', sequence);
