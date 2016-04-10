@@ -22,7 +22,7 @@ define([
 
             $('body').on('click', '[data-play-id]', function(event) {
                 event.preventDefault();
-
+                
                 var $el = $(event.currentTarget);
                 var id = $el.data('play-id');
                 var type = $el.data('play-type');
