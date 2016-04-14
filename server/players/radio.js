@@ -35,7 +35,11 @@ function setStatus(data) {
         status.state = data.status;
     } else {
         if(data.playing) {
-            status.state = 'playing';
+            if(data.filename === null) {
+                status.state = 'idle';
+            } else {
+                status.state = 'playing';
+            }
         } else {
             if(data.filename) {
                 status.state = 'idle';
@@ -110,6 +114,7 @@ RadioPlayer.prototype.stop = function() {
         player.once('stop', resolve);
         resetStatus();
         player.stop();
+        setTimeout(resolve, 300);
     });
 };
 
