@@ -1,6 +1,6 @@
 define(function() {
     return {
-        baseUrl: window.location.protocol + '//' + window.location.hostname + ':5000/',
-        apiUrl: window.location.protocol + '//' + window.location.hostname + ':5000/api/'
+        baseUrl: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/',
+        apiUrl: window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/api/'
     }
 });
