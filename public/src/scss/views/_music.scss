@@ -388,6 +388,7 @@
 
 .view-music {
     padding: 0 10px;
+    @extend %clearfix;
 
     header {
         @extend %clearfix;
