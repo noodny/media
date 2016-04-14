@@ -133,9 +133,7 @@ gulp.task('watch', function() {
 
 gulp.task('sync', function() {
     return browserSync.init({
-        server: {
-            baseDir: dist
-        }
+        proxy: 'localhost:5000'
     });
 });
 
