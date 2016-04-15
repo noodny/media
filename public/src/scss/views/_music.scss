@@ -666,14 +666,9 @@
 
 .items-list {
     transition: opacity $transition;
-    opacity: 0;
 
-    &.loaded {
-        opacity: 1;
-
-        & + .loader {
-            display: none;
-        }
+    &.loaded + .loader {
+        display: none;
     }
 }
 

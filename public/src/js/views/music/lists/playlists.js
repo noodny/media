@@ -1,50 +1,29 @@
 define([
+    'views/list',
     'utils/device',
     'collections/music/playlists',
     'text!templates/music/lists/playlists.html',
     'text!templates/music/lists/items/playlist.html'
-], function(device, Collection, template, itemTemplate) {
-    var View = Backbone.View.extend({
+], function(ListView, device, Collection, template, itemTemplate) {
+    var View = ListView.extend({
+        viewTemplate: template,
+        itemTemplate: itemTemplate,
         initialize: function(options) {
             this.options = options;
 
             this.collection = new Collection(options.elements || [], {
                 type: options.type || 'my'
             });
-        },
-        render: function() {
-            this.$el.html(template);
-
-            if(!this.options.fetched) {
-                this.collection.fetch()
-                    .done(this.onFetchSuccess.bind(this))
-                    .fail(this.onFetchFailure.bind(this));
-            } else {
-                this.renderItems();
-            }
-        },
-        renderItems: function() {
-            var html = '';
-
-            this.collection.each(function(item) {
-                html += _.template(itemTemplate, {playlist: item});
-            });
-
-            this.$('.items-list').html(html).addClass('loaded');
 
             if(this.options.layout) {
                 this.$el.addClass('layout-' + this.options.layout);
 
                 $(window).on('resize', _.throttle(this.onWindowResize.bind(this), 200));
-                this.onWindowResize();
             }
         },
-        onFetchSuccess: function(data) {
-            this.trigger('fetch-success', data);
-            this.renderItems();
-        },
-        onFetchFailure: function() {
-            console.error('PlaylistView: failed fetching playlist collection')
+        renderItems: function() {
+            ListView.prototype.renderItems.call(this);
+            this.onWindowResize();
         },
         onWindowResize: function() {
             var $items = this.$('.list-item-playlist .details');

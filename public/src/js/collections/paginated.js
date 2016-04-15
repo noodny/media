@@ -18,12 +18,17 @@ define(function() {
     var Collection = Backbone.Collection.extend({
         parse: function(data) {
             var items = _.isArray(data) ? data : data.items || data.tracks || data.playlists || data.albums || data.categories || [];
-
+            
             if(items.items) {
+                if(_.has(items, 'next') && _.has(items, 'offset') && _.has(items, 'limit')) {
+                    data.next = items.next;
+                    data.offset = items.offset;
+                    data.limit = items.limit;
+                }
                 items = items.items;
             }
 
-            if(_.has(data, ['next', 'offset', 'limit']) && data.next) {
+            if(_.has(data, 'next') && _.has(data, 'offset') && _.has(data, 'limit') && data.next) {
                 setParams.call(this, data)
             } else {
                 clearParams.call(this);
