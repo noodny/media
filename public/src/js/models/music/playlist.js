@@ -1,11 +1,15 @@
 define([
-], function() {
+    'config'
+], function(config) {
     var Model = Backbone.Model.extend({
         defaults: {
             id: null,
             image: null,
             name: null,
             uri: null
+        },
+        url: function() {
+            return config.apiUrl + 'spotify/playlists/' + this.get('uri')
         },
         parse: function(data) {
             var parsed = {

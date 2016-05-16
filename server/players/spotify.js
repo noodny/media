@@ -58,6 +58,7 @@ function setStatus(data) {
     trySetting('position');
     trySetting('shuffle');
     trySetting('repeat');
+    trySetting('playlistUri');
 
     instance.emit('status', status);
 }
@@ -117,7 +118,7 @@ SpotifyPlayer.prototype.open = function(id) {
             ]).then(function(data) {
                 var tracks = data[0].tracks;
                 var albums = data[1].items;
-
+                console.log(id);
                 // as a workaround play the first top track and then enqueue the rest (enqueuing all takes ~20s)
                 return spop.uplay(tracks.shift().uri).then(function(status) {
                     status.playlistUri = id;
@@ -135,8 +136,6 @@ SpotifyPlayer.prototype.open = function(id) {
                 id: uri.id
             }).then(function(data) {
                 if(data.album) {
-                    status.playlistUri = data.album.uri;
-
                     return spop.qclear().then(function() {
                         return spop.uadd(data.album.uri);
                     }, function(error) {
@@ -145,7 +144,8 @@ SpotifyPlayer.prototype.open = function(id) {
                         return spop.goto(data.track_number);
                     }, function(error) {
                         console.error('SPOP: Failed enqueuing album ' + data.album.uri, error);
-                    }).then(function(status) {
+                    }).then(function(status) { 
+                        status.playlistUri = data.album.uri;
                         setStatus(status);
                     }, function(error) {
                         console.error('SPOP: Failed playing album track number ' + data.track_number, error);

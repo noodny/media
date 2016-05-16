@@ -19,7 +19,8 @@ define([
                         this.headerView.render();
 
                         this.playerView = new PlayerView({
-                            el: $('#player-container')
+                            el: $('#player-container'),
+                            router: this.router
                         });
                         this.playerView.render();
 

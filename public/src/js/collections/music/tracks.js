@@ -29,6 +29,11 @@ define([
                 url += 'spotify/albums/' + id + '/tracks';
             }
 
+            if(this.type.indexOf('playlist') === 0) {
+                var id = this.type.replace('playlist-', '');
+                url += 'spotify/playlists/' + id + '/tracks';
+            }
+
             if(this.type.indexOf('search') === 0) {
                 var query = this.type.replace('search/', '');
                 url += 'spotify/search/' + query + '?type=track';

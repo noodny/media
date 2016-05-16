@@ -13,7 +13,7 @@ define([
             this.collection = new Collection(options.elements || [], {
                 type: options.type || 'my'
             });
-        }
+        } 
     });
 
     return View;

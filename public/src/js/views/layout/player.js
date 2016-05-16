@@ -11,14 +11,20 @@ define([
             'change .player-scrubber-pane': 'onPlayerScrubberChange',
             'input .player-scrubber-pane': 'onPlayerScrubberInput',
             'click .player-scrubber-pane': 'onPlayerScrubberClick',
-            'click .player-scrubber-progress': 'onPlayerScrubberClick'
+            'click .player-scrubber-progress': 'onPlayerScrubberClick',
+            'click .player-details .image': 'onPlayerImageClick'
         },
-        initialize: function() {
+        initialize: function(options) {
             this.model = new Player();
             this.listenTo(this.model, 'status', this.onStatusChange.bind(this));
             this.listenTo(this.model, 'time', this.onTimeChange.bind(this));
             this.model.fetch()
                 .done(this.onPlayerFetch.bind(this));
+
+            options = options || {};
+            if(options.router) {
+                this.router = options.router;
+            }
 
             $('body').on('click', '[data-play-id]', function(event) {
                 event.preventDefault();
@@ -120,6 +126,60 @@ define([
             var value = (event.offsetX / this.$scrubber.width()) * 100;
             this.$scrubber.val(value);
             this.$scrubber.trigger('change');
+        },
+        onPlayerImageClick: function(event) {
+            event.preventDefault();
+
+            function parseUri(uri) {
+                var parts = uri.split(':');
+
+                if(parts[0] === 'spotify') {
+                    parts.shift();
+                }
+
+                if(parts.length > 2 && parts[0] === 'user' && parts[2] === 'playlist') {
+                    return {
+                        type: parts[2],
+                        id: parts[3],
+                        userId: parts[1]
+                    };
+                } else {
+                    return {
+                        type: parts[0],
+                        id: parts[1]
+                    };
+                }
+            }
+
+            if(this.model.get('type') === 'spotify') {
+                event.stopPropagation();
+
+                var uri = this.model.get('playlistUri');
+                if(uri) {
+                    uri = parseUri(uri);
+
+                    if(uri.type === 'playlist') {
+                        this.router.navigate('#!/music/browse/playlist/' + this.model.get('playlistUri'), {
+                            replace: true,
+                            trigger: true
+                        });
+                    }
+
+                    if(uri.type === 'artist') {
+                        this.router.navigate('#!/music/browse/artist/' + uri.id, {
+                            replace: true,
+                            trigger: true
+                        });
+                    }
+
+                    if(uri.type === 'album') {
+                        this.router.navigate('#!/music/browse/album/' + uri.id, {
+                            replace: true,
+                            trigger: true
+                        });
+                    }
+                }
+            }
         }
     });
 

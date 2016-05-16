@@ -239,7 +239,7 @@ module.exports = {
         options = options || {};
 
         var uri = parseUri(options.uri);
-
+        
         return requestAuthorized({
             url: 'users/' + uri.userId + '/playlists/' + uri.id,
             qs: {

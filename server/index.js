@@ -44,6 +44,7 @@ app.get('/api/spotify/artists/:id/tracks', routes.spotify.getArtistTopTracks);
 app.get('/api/spotify/albums/:id', routes.spotify.getAlbum);
 app.get('/api/spotify/albums/:id/tracks', routes.spotify.getAlbumTracks);
 app.get('/api/spotify/playlists/:uri', routes.spotify.getPlaylist);
+app.get('/api/spotify/playlists/:uri/tracks', routes.spotify.getPlaylistTracks);
 app.get('/api/spotify/search/:query', routes.spotify.getSearch);
 
 app.get('/api/player/status', function(req, res, next) {

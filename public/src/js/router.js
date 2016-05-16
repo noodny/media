@@ -6,13 +6,14 @@ define([
     'views/music/search',
     'views/music/browse',
     'views/music/browse/category',
+    'views/music/browse/playlist',
     'views/music/browse/artist',
     'views/music/browse/album',
     'views/photos',
     'views/error'
 ], function(MoviesView, SeriesView,
             MusicView, MusicRadioView, MusicSearchView, MusicBrowseView,
-            MusicBrowseCategoryView, MusicBrowseArtistView, MusicBrowseAlbumView,
+            MusicBrowseCategoryView, MusicBrowsePlaylistView, MusicBrowseArtistView, MusicBrowseAlbumView,
             PhotosView, ErrorView) {
     var Router = Backbone.Router.extend({
         routes: {
@@ -55,6 +56,10 @@ define([
 
         musicBrowseCategory: function(id) {
             this.trigger('viewChange', MusicBrowseCategoryView, {id: id});
+        },
+
+        musicBrowsePlaylist: function(id) {
+            this.trigger('viewChange', MusicBrowsePlaylistView, {id: id});
         },
 
         musicBrowseArtist: function(id) {
