@@ -3,6 +3,7 @@ define([
     'views/series',
     'views/music',
     'views/music/radio',
+    'views/music/search',
     'views/music/browse',
     'views/music/browse/category',
     'views/music/browse/artist',
@@ -10,7 +11,7 @@ define([
     'views/photos',
     'views/error'
 ], function(MoviesView, SeriesView,
-            MusicView, MusicRadioView, MusicBrowseView,
+            MusicView, MusicRadioView, MusicSearchView, MusicBrowseView,
             MusicBrowseCategoryView, MusicBrowseArtistView, MusicBrowseAlbumView,
             PhotosView, ErrorView) {
     var Router = Backbone.Router.extend({
@@ -66,6 +67,10 @@ define([
 
         musicRadio: function(filter) {
             this.trigger('viewChange', MusicRadioView, {filter: filter});
+        },
+
+        musicSearch: function(query) {
+            this.trigger('viewChange', MusicSearchView, {query: query});
         },
 
         photos: function() {

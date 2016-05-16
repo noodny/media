@@ -1,0 +1,10 @@
+<a href="#" class="list-item list-item-artist" data-play-id="<%= model.get('uri') %>" data-play-type="spotify">
+    <div class="image">
+        <img src="<%= model.get('image') %>"/>
+    </div>
+    <div class="details">
+        <div class="name"><%= model.get('name') %></div>
+    </div>
+    <div class="item-action <%= model.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i>
+    </div>
+</a>

@@ -17,8 +17,8 @@ define(function() {
 
     var Collection = Backbone.Collection.extend({
         parse: function(data) {
-            var items = _.isArray(data) ? data : data.items || data.tracks || data.playlists || data.albums || data.categories || [];
-            
+            var items = _.isArray(data) ? data : data.items || data.tracks || data.playlists || data.albums || data.categories || data.artists || [];
+
             if(items.items) {
                 if(_.has(items, 'next') && _.has(items, 'offset') && _.has(items, 'limit')) {
                     data.next = items.next;
@@ -38,7 +38,7 @@ define(function() {
         },
         getQueryParams: function() {
             if(this.hasNext()) {
-                return '?limit=' + this.params.limit + '&offset=' + this.params.offset;
+                return 'limit=' + this.params.limit + '&offset=' + this.params.offset;
             } else {
                 return '';
             }

@@ -260,5 +260,22 @@ module.exports = {
                 country: 'PL'
             }
         });
+    },
+    getSearch: function(options) {
+        options = options || {};
+
+        var query = options.query,
+            type = options.type;
+
+        return requestAuthorized({
+            url: 'search',
+            qs: {
+                limit: options.limit || DEFAULT_LIMIT,
+                offset: options.offset || 0,
+                q: query,
+                type: type || 'track',
+                country: 'PL'
+            }
+        });
     }
 };

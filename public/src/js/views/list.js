@@ -29,7 +29,7 @@ define([
 
             var $window = $(window);
 
-            if(this.collection.hasNext()) {
+            if(this.collection.hasNext && this.collection.hasNext()) {
                 if(!this.paginationBound) {
                     var threshold = 300;
                     var $document = $(document);

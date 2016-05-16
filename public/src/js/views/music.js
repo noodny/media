@@ -11,7 +11,8 @@ define([
             this.$el.html(_.template(template));
 
             this.searchView = new SearchView({
-                el: this.$('.view-search-container')
+                el: this.$('.view-search-container'),
+                type: 'music'
             });
             this.searchView.render();
 
@@ -42,7 +43,7 @@ define([
 
             this.stations.each(function(station) {
                 html += _.template(stationTemplate, {
-                    station: station
+                    model: station
                 });
             });
 

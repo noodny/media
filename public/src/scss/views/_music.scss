@@ -1,6 +1,8 @@
 .items-list {
     .list-item-station,
-    .list-item-playlist {
+    .list-item-playlist,
+    .list-item-artist,
+    .list-item-album {
         background: $grayMedium;
         display: block;
         padding-left: 60px;
@@ -672,10 +674,9 @@
     }
 }
 
-
 // TODO: remove when starring/following is implemented
 .star {
-    display: none!important;
+    display: none !important;
 }
 
 .view-music-browse {
@@ -765,7 +766,7 @@
         overflow: hidden;
         position: relative;
         display: block;
-        transform: translate3d(0,0,0);
+        transform: translate3d(0, 0, 0);
 
         @include media(smartphone-big) {
             padding: 20px 30px 20px 140px;
@@ -970,6 +971,37 @@
                     padding: 10px 5px 10px 0;
                 }
             }
+        }
+    }
+}
+
+.view-music-search {
+    h2 {
+        font-size: 20px;
+        text-transform: uppercase;
+        padding: 10px 15px 5px;
+
+        @include media(smartphone-big) {
+            padding-left: 30px;
+        }
+
+        @include media(tablet-big) {
+            padding-bottom: 10px;
+        }
+
+        @include media(web) {
+            padding-left: 42px;
+            font-size: 24px;
+        }
+    }
+
+    .playlists-list,
+    .artists-list,
+    .albums-list {
+        padding: 0 5px;
+
+        @include media(web) {
+            padding: 0 35px;
         }
     }
 }

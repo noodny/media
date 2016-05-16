@@ -1,9 +1,9 @@
 define([
     'utils/device',
     'views/list',
-    'collections/music/radio/stations',
-    'text!templates/music/lists/stations.html',
-    'text!templates/music/lists/items/station.html'
+    'collections/music/albums',
+    'text!templates/music/lists/albums.html',
+    'text!templates/music/lists/items/album.html'
 ], function(device, ListView, Collection, template, itemTemplate) {
     var View = ListView.extend({
         viewTemplate: template,
@@ -26,8 +26,8 @@ define([
             this.onWindowResize();
         },
         onWindowResize: function() {
-            var $items = this.$('.list-item-station .details');
-            var $lists = this.$('.stations-list');
+            var $items = this.$('.list-item-album .details');
+            var $lists = this.$('.albums-list');
 
             $items.removeAttr('style');
             var maxHeight = Math.max.apply(null, $items.map(function() {

@@ -31,7 +31,8 @@ define([
                 .fail(this.onFetchFailure.bind(this));
 
             this.searchView = new SearchView({
-                el: this.$('.view-search-container')
+                el: this.$('.view-search-container'),
+                type: 'music'
             });
             this.searchView.render();
 

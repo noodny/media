@@ -29,7 +29,12 @@ define([
                 url += 'spotify/albums/' + id + '/tracks';
             }
 
-            url += this.getQueryParams();
+            if(this.type.indexOf('search') === 0) {
+                var query = this.type.replace('search/', '');
+                url += 'spotify/search/' + query + '?type=track';
+            }
+
+            url += (url.indexOf('?') > -1 ? '&' : '?') + this.getQueryParams();
 
             return url;
         }

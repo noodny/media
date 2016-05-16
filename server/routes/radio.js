@@ -89,5 +89,26 @@ module.exports = {
         } else {
             res.status(404).send();
         }
+    },
+    getSearch: function(req, res, next) {
+        var query = req.params.query;
+
+        if(!query) {
+            return res.status(400).send();
+        }
+
+        if(query.trim().length < 3) {
+            return res.status(400).send('Query must be longer than 3 characters');
+        }
+
+        var stations = db('stations').filter(function(station) {
+            return station.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+        });
+
+        if(stations && stations.length) {
+            res.send(stations);
+        } else {
+            res.status(404).send();
+        }
     }
 };

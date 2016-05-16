@@ -30,6 +30,7 @@ app.get('/api/radio/stations/:id', routes.radio.getStation);
 app.get('/api/radio/categories', routes.radio.getCategories);
 app.get('/api/radio/countries', routes.radio.getCountries);
 app.get('/api/radio/pinned', routes.radio.getPinned);
+app.get('/api/radio/search/:query', routes.radio.getSearch);
 
 app.get('/api/spotify/my-playlists', routes.spotify.getMyPlaylists);
 app.get('/api/spotify/my-tracks', routes.spotify.getMyTracks);
@@ -43,6 +44,7 @@ app.get('/api/spotify/artists/:id/tracks', routes.spotify.getArtistTopTracks);
 app.get('/api/spotify/albums/:id', routes.spotify.getAlbum);
 app.get('/api/spotify/albums/:id/tracks', routes.spotify.getAlbumTracks);
 app.get('/api/spotify/playlists/:uri', routes.spotify.getPlaylist);
+app.get('/api/spotify/search/:query', routes.spotify.getSearch);
 
 app.get('/api/player/status', function(req, res, next) {
     res.send(player.getStatus());

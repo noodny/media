@@ -28,9 +28,14 @@ define([
                 url += 'spotify/categories/' + id;
             }
 
-            url += this.getQueryParams();
+            if(this.type.indexOf('search') === 0) {
+                var query = this.type.replace('search/', '');
+                url += 'spotify/search/' + query + '?type=playlist';
+            }
 
-            return url
+            url += (url.indexOf('?') > -1 ? '&' : '?') + this.getQueryParams();
+
+            return url;
         }
     });
 

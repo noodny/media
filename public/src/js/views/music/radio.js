@@ -4,7 +4,7 @@ define([
     'collections/music/radio/categories',
     'views/search',
     'text!templates/music/radio.html',
-    'text!templates/music/lists/stations.html',
+    'text!templates/music/browse/stations.html',
     'text!templates/music/lists/items/station.html'
 ], function(StationsCollection, CountriesCollection, CategoriesCollection, SearchView, template, radiosListTemplate, stationTemplate) {
     var View = Backbone.View.extend({
@@ -47,7 +47,8 @@ define([
             }
 
             this.searchView = new SearchView({
-                el: this.$('.view-search-container')
+                el: this.$('.view-search-container'),
+                type: 'music'
             });
             this.searchView.render();
         },
@@ -69,7 +70,7 @@ define([
 
             this.stations.each(function(station) {
                 html += _.template(stationTemplate, {
-                    station: station
+                    model: station
                 });
             });
 

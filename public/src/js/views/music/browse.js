@@ -9,7 +9,8 @@ define([
             this.$el.html(_.template(template));
 
             this.searchView = new SearchView({
-                el: this.$('.view-search-container')
+                el: this.$('.view-search-container'),
+                type: 'music'
             });
             this.searchView.render();
 

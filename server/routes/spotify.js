@@ -12,6 +12,12 @@ function proxyRoute(name) {
             options[key] = value;
         });
 
+        _.each(req.query, function(value, key) {
+            if(!options[key]) {
+                options[key] = value;
+            }
+        });
+
         spotify[name](options).then(
             function(data) {
                 res.status(200).send(data);
@@ -34,7 +40,8 @@ var routes = [
     'getCategories', 'getCategoryPlaylists',
     'getArtist', 'getArtistAlbums', 'getArtistTopTracks',
     'getAlbum', 'getAlbumTracks',
-    'getPlaylist', 'getPlaylistTracks', 'getTrack'
+    'getPlaylist', 'getPlaylistTracks', 'getTrack',
+    'getSearch'
 ];
 
 var handlers = {};

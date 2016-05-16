@@ -1,7 +1,7 @@
-<a href="#" class="list-item list-item-station" data-play-id="<%= station.get('id') %>" data-play-type="radio">
+<a href="#" class="list-item list-item-station" data-play-id="<%= model.get('id') %>" data-play-type="radio">
     <div class="image">
-        <img src="<%= station.getImage() %>"/>
+        <img src="<%= model.getImage() %>"/>
     </div>
-    <div class="name"><%= station.get('name') %></div>
-    <div class="item-action <%= station.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i></div>
+    <div class="name"><%= model.get('name') %></div>
+    <div class="item-action <%= model.get('starred') ? 'unstar' : 'star' %>"><i class="icon"></i></div>
 </a>

@@ -6,8 +6,14 @@ define([
         model: Station,
 
         initialize: function(models, options) {
-            if(options && options.fetch) {
+            options = options || {};
+
+            if(options.fetch) {
                 this.fetchOptions = options.fetch;
+            }
+
+            if(options.type) {
+                this.type = options.type;
             }
         },
 
@@ -24,6 +30,11 @@ define([
                     filters.push(key + '::' + value);
                 });
                 url += '/stations?filter=' + filters.join('|');
+            }
+
+            if(this.type && this.type.indexOf('search') === 0) {
+                var query = this.type.replace('search/', '');
+                url += '/search/' + query;
             }
 
             return url;

@@ -15,12 +15,12 @@ define([
         },
 
         parse: function(data) {
-            return {
+            return { 
                 id: data.id,
                 uri: data.uri,
                 name: data.name,
                 followers: (data.followers ? data.followers.total || 0 : 0),
-                image: (data.images ? data.images[0].url : null)
+                image: (data.images && data.images[0] ? data.images[0].url : null)
             }
         },
 

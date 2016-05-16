@@ -12,7 +12,8 @@ define([
             this.options = options;
 
             this.collection = new Collection(options.elements || [], {
-                type: options.type || 'my'
+                type: options.type || 'my',
+                limit: options.limit || null
             });
 
             if(this.options.layout) {
@@ -24,7 +25,7 @@ define([
         renderItems: function() {
             ListView.prototype.renderItems.call(this);
             this.onWindowResize();
-        },
+        }, 
         onWindowResize: function() {
             var $items = this.$('.list-item-playlist .details');
             var $lists = this.$('.playlists-list');

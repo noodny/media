@@ -9,7 +9,7 @@ define([
             Backbone.Collection.prototype.initialize.apply(this, arguments);
         },
         url: function() {
-            return config.apiUrl + 'spotify/categories' + this.getQueryParams();
+            return config.apiUrl + 'spotify/categories?' + this.getQueryParams();
         }
     });
 
