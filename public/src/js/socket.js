@@ -9,7 +9,7 @@ define([
     _.extend(Socket, Backbone.Events);
 
     Socket.initialize = function() {
-        this.connection = io(config.baseUrl);
+        this.connection = io(config.playerUrl);
 
         var events = ['player:status', 'player:time'];
 

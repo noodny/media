@@ -102,7 +102,10 @@ gulp.task('scripts', function() {
                 filename: 'main.js'
             },
             resolve: {
-                modulesDirectories: [src + 'js', 'node_modules']
+                modulesDirectories: [src + 'js', 'node_modules'],
+                alias: {
+                    'config': 'configuration/' + env
+                }
             },
             module: {
                 loaders: [

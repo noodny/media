@@ -5,6 +5,8 @@
 /node_modules
 
 /public/src/scss/_sprites.scss
+/public/src/js/configuration/production.js
+/public/src/js/configuration/development.js
 
 /public/dist
 
