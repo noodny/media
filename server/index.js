@@ -56,32 +56,32 @@ if(ROLE === 'api' || ROLE === 'both') {
 if(ROLE === 'player' || ROLE === 'both') {
     var player = require('./player');
 
-    app.get('/api/player/status', function(req, res, next) {
+    app.get('/player/status', function(req, res, next) {
         res.send(player.getStatus());
     });
 
     // TODO: remove REST player endpoints when testing phase is done
-    app.get('/api/player/open', function(req, res, next) {
+    app.get('/player/open', function(req, res, next) {
         player.open(req.query.type, req.query.id);
         res.status(200).end();
     });
-    app.get('/api/player/toggle', function(req, res, next) {
+    app.get('/player/toggle', function(req, res, next) {
         player.toggle();
         res.status(200).end();
     });
-    app.get('/api/player/next', function(req, res, next) {
+    app.get('/player/next', function(req, res, next) {
         player.next();
         res.status(200).end();
     });
-    app.get('/api/player/previous', function(req, res, next) {
+    app.get('/player/previous', function(req, res, next) {
         player.previous();
         res.status(200).end();
     });
-    app.get('/api/player/shuffle', function(req, res, next) {
+    app.get('/player/shuffle', function(req, res, next) {
         player.shuffle();
         res.status(200).end();
     });
-    app.get('/api/player/repeat', function(req, res, next) {
+    app.get('/player/repeat', function(req, res, next) {
         player.repeat();
         res.status(200).end();
     });
@@ -89,7 +89,7 @@ if(ROLE === 'player' || ROLE === 'both') {
         player.stop();
         res.status(200).end();
     });
-    app.get('/api/player/seek', function(req, res, next) {
+    app.get('/player/seek', function(req, res, next) {
         player.seek(req.query.ms);
         res.status(200).end();
     });

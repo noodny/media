@@ -5,7 +5,7 @@ define([
     'models/music/station'
 ], function(config, Socket, Track, Station) {
     var Player = Backbone.Model.extend({
-        url: config.apiUrl + 'player/status',
+        url: config.playerUrl + 'player/status',
         initialize: function() {
             Socket.on('player:status', this.onStatus.bind(this));
             Socket.on('player:time', this.onTime.bind(this));
