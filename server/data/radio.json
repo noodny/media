@@ -109467,6 +109467,24 @@
         17,
         43
       ]
+    },
+    {
+      "name": "Kiss FM",
+      "url": "",
+      "description": "",
+      "location": "Canary Islands",
+      "streams": [
+        {
+          "type": "MP3",
+          "label": "48 Kbps",
+          "stream": "http://kissfm.kissfmradio.cires21.com/kissfm.mp3"
+        }
+      ],
+      "id": 5230,
+      "country": 52,
+      "image": "1094-kissfm.png",
+      "categories": [
+      ]
     }
   ],
   "categories": [

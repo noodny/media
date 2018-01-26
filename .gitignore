@@ -1,5 +1,4 @@
 .DS_Store
-/server/config.js
 
 /.idea
 /node_modules
@@ -9,5 +8,3 @@
 /public/src/js/configuration/development.js
 
 /public/dist
-
-/server/data/preferences.json
