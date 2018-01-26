@@ -109477,12 +109477,12 @@
         {
           "type": "MP3",
           "label": "48 Kbps",
-          "stream": "http://kissfm.kissfmradio.cires21.com/kissfm.mp3"
+          "stream": "http://data.kjakubik.pl/kissfm.pls"
         }
       ],
-      "id": 5230,
+      "id": 5280,
       "country": 52,
-      "image": "1094-kissfm.png",
+      "image": "5280-kissfm.png",
       "categories": [
       ]
     }
